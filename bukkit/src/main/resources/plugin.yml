@@ -1,14 +1,13 @@
-name: ServerPanelManager
+name: BeeNameGenerator
 version: '${version}'
 author: p0t4t0sandwich
-description: A plugin that allows you to manage your Panel's game servers from within minecraft
-main: dev.neuralnexus.serverpanelmanager.bukkit.BukkitSPMPlugin
-depend: []
+description: A plugin that implements the bee-name-generator API to generate names for bees.
+main: dev.neuralnexus.beenamegenerator.bukkit.BukkitBNGPlugin
+depend: [TaterLib]
 softdepend: [LuckPerms]
 folia-supported: true
 commands:
-  spm:
-    description: "A command that allows you to manage your Panel's game servers from within minecraft"
-    usage: /spm <command> [args]
-    aliases: [amp]
-    permission: spm.command
+  bng:
+    description: "A command that generates a name for a bee."
+    usage: /bng <command> [args]
+    permission: bng.command

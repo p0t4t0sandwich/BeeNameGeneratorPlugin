@@ -2,22 +2,22 @@ package dev.neuralnexus.beenamegenerator.fabric.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
-import dev.neuralnexus.beenamegenerator.fabric.player.FabricPlayer;
-import dev.neuralnexus.serverpanelmanager.common.commands.SPMCommand;
-import dev.neuralnexus.serverpanelmanager.common.hooks.LuckPermsHook;
+import dev.neuralnexus.taterlib.fabric.player.FabricPlayer;
+import dev.neuralnexus.taterlib.common.commands.TaterLibCommand;
+import dev.neuralnexus.taterlib.common.hooks.LuckPermsHook;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-import static dev.neuralnexus.serverpanelmanager.common.Utils.runTaskAsync;
+import static dev.neuralnexus.taterlib.common.Utils.runTaskAsync;
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 /**
  * Fabric implementation of the SPM command.
  */
-public class FabricSPMCommand {
+public class FabricBNGCommand {
     /**
      * Registers the command.
      * @param dispatcher The command dispatcher.
@@ -50,7 +50,7 @@ public class FabricSPMCommand {
                                     FabricPlayer player = isPlayer ? new FabricPlayer((ServerPlayerEntity) context.getSource().getEntity()) : null;
 
                                     // Execute command
-                                    SPMCommand.executeCommand(player, isPlayer, args);
+                                    TaterLibCommand.executeCommand(player, isPlayer, args);
                                 } catch (Exception e) {
                                     System.err.println(e);
                                     e.printStackTrace();

@@ -1,5 +1,7 @@
 package dev.neuralnexus.beenamegenerator.common;
 
+import dev.neuralnexus.taterlib.common.Utils;
+
 /**
  * The TaterAPI plugin interface.
  */

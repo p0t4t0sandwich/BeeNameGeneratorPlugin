@@ -5,6 +5,12 @@ plugins {
     id('fabric-loom') version('1.3-SNAPSHOT')
 }
 
+repositories {
+    flatDir {
+        dirs('../TaterLib/target')
+    }
+}
+
 dependencies {
     implementation(project(path: ':common', configuration: 'shadow'))
 
@@ -17,13 +23,15 @@ dependencies {
     Set<String> apiModules = [
             'fabric-api-base',
             'fabric-command-api-v2',
-            'fabric-lifecycle-events-v1',
-            'fabric-networking-api-v1'
+            'fabric-lifecycle-events-v1'
     ]
 
     apiModules.forEach {
         modImplementation(fabricApi.module(it, project.fabric_version))
     }
+
+    // TaterLib
+    modImplementation(fileTree(dir: '../TaterLib/target', include: 'TaterLib-1.0.0-fabric-1.20.jar'))
 }
 
 processResources {

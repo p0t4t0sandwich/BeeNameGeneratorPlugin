@@ -8,8 +8,8 @@ dependencies {
     // Spigot
     compileOnly("org.spigotmc:spigot-api:${minecraft_version}-${bukkit_version}")
 
-    // Paper
-    compileOnly("io.papermc.paper:paper-api:${minecraft_version}-${bukkit_version}")
+    // TaterLib
+    compileOnly(files("../../TaterLib/target/TaterLib-1.0.0-bukkit.jar"))
 }
 
 java.disableAutoTargetJvm()
