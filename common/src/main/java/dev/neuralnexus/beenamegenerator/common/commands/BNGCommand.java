@@ -37,9 +37,21 @@ public interface BNGCommand {
         String text = "&cUnknown command. Type \"/bng help\" for help.";
 
         switch (args[0].toLowerCase()) {
+            // Shows all available commands.
             case "help":
-                text = "&cUsage: /bng <command>";
+                text = "\n&6Available commands:" +
+                    "\n&6/bng help &a- Shows all available commands." +
+                    "\n&6/bng reload &a- Reloads the plugin." +
+                    "\n&6/bng get &a- Gets a random bee name." +
+                    "\n&6/bng add &a- Adds a bee name to the database." +
+                    "\n&6/bng suggest &a- Suggests a bee name." +
+                    "\n&6/bng suggest submit &a- Submits a suggestion for a bee name." +
+                    "\n&6/bng suggest list &a- Gets a list of suggestions." +
+                    "\n&6/bng suggest accept &a- Accepts a suggestion." +
+                    "\n&6/bng suggest reject &a- Rejects a suggestion.";
                 break;
+
+            // Reloads the plugin.
             case "reload":
                 try {
                     BeeNameGenerator.reload();
@@ -48,9 +60,67 @@ public interface BNGCommand {
                     text = "&cFailed to reload config.";
                 }
                 break;
+
+            // Gets a random bee name.
             case "get":
                 Map<?, ?> res = BeeNameGenerator.getBNGAPIHandler().getBeeName();
                 text = "&a" + res.get("name");
+                break;
+
+            // Adds a bee name to the database.
+            case "add":
+                if (args.length == 1) {
+                    text = "&cUsage: /bng add <name>";
+                } else {
+                    BeeNameGenerator.getBNGAPIHandler().uploadBeeName(args[1]);
+                    text = "&aSuccessfully added " + args[1] + " to the database.";
+                }
+                break;
+
+            // Suggests a bee name.
+            case "suggest":
+                if (args.length == 1) {
+                    text = "&cUsage: /bng suggest <command>";
+                } else {
+                    switch (args[1].toLowerCase()) {
+                        // Gets a list of suggestions.
+                        case "list":
+                            int amount = args.length == 2 ? 10 : Integer.parseInt(args[2]);
+                            res = BeeNameGenerator.getBNGAPIHandler().getSuggestions(amount);
+                            text = "&a" + res.get("suggestions");
+                            break;
+
+                        // Accepts a suggestion.
+                        case "accept":
+                            if (args.length == 2) {
+                                text = "&cUsage: /bng suggest accept <name>";
+                            } else {
+                                BeeNameGenerator.getBNGAPIHandler().acceptSuggestion(args[2]);
+                                text = "&aSuccessfully accepted suggestion for " + args[2] + ".";
+                            }
+                            break;
+
+                        // Rejects a suggestion.
+                        case "reject":
+                            if (args.length == 2) {
+                                text = "&cUsage: /bng suggest reject <name>";
+                            } else {
+                                BeeNameGenerator.getBNGAPIHandler().rejectSuggestion(args[2]);
+                                text = "&aSuccessfully rejected suggestion for " + args[2] + ".";
+                            }
+                            break;
+
+                        // Submits a suggestion for a bee name.
+                        default:
+                            if (args.length == 2) {
+                                text = "&cUsage: /bng suggest <name|command>";
+                            } else {
+                                BeeNameGenerator.getBNGAPIHandler().submitBeeName(args[2]);
+                                text = "&aSuccessfully submitted suggestion for " + args[2] + ".";
+                            }
+                            break;
+                    }
+                }
                 break;
         }
 
