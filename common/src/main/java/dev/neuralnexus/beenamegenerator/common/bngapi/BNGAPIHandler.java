@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 public class BNGAPIHandler {
@@ -55,8 +56,6 @@ public class BNGAPIHandler {
      */
     public Object APICall(String endpoint, String requestMethod, Class<?> returnClass) {
         try {
-            Gson gson = new GsonBuilder().create();
-
             URL url = new URL(this.dataSource + endpoint);
 
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -72,12 +71,10 @@ public class BNGAPIHandler {
 
             con.setRequestProperty("User-Agent", "bee-name-generator-plugin");
             con.setConnectTimeout(5000);
-            OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream());
 
-            osw.flush();
-            osw.close();
             BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
+            Gson gson = new GsonBuilder().create();
             return gson.fromJson(br.readLine(), returnClass);
 
         } catch (IOException e) {

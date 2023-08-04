@@ -3,6 +3,7 @@ package dev.neuralnexus.beenamegenerator.common.commands;
 import dev.neuralnexus.beenamegenerator.common.BeeNameGenerator;
 import dev.neuralnexus.beenamegenerator.common.BeeNameGeneratorPlugin;
 import dev.neuralnexus.taterlib.common.Utils;
+import dev.neuralnexus.taterlib.common.placeholder.PlaceholderParser;
 import dev.neuralnexus.taterlib.common.player.AbstractPlayer;
 
 import java.util.Map;
@@ -64,7 +65,9 @@ public interface BNGCommand {
                 player.sendMessage(executeCommand(args));
             }
         } else {
-            BeeNameGeneratorPlugin.useLogger(Utils.ansiiParser(executeCommand(args)));
+            BeeNameGeneratorPlugin.useLogger(
+                    Utils.ansiiParser(
+                            PlaceholderParser.substituteSectionSign(executeCommand(args))));
         }
     }
 }
