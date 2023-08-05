@@ -2,6 +2,7 @@ package dev.neuralnexus.beenamegenerator.common.commands;
 
 import dev.neuralnexus.beenamegenerator.common.BeeNameGenerator;
 import dev.neuralnexus.beenamegenerator.common.BeeNameGeneratorPlugin;
+import dev.neuralnexus.beenamegenerator.common.abstractions.entity.AbstractEntity;
 import dev.neuralnexus.taterlib.common.Utils;
 import dev.neuralnexus.taterlib.common.placeholder.PlaceholderParser;
 import dev.neuralnexus.taterlib.common.player.AbstractPlayer;
@@ -13,11 +14,11 @@ import java.util.Map;
  */
 public interface BNGCommand {
     static String getCommandName() {
-        return "spm";
+        return "bng";
     }
 
     static String getCommandDescription() {
-        return "Root command for Server Panel Manager.";
+        return "A plugin that implements the bee-name-generator API to generate names for bees.";
     }
 
     static String permissionBuilder(String[] args) {
@@ -32,8 +33,15 @@ public interface BNGCommand {
         }
     }
 
-    static String executeCommand(String[] args) {
-        if (args.length == 0) return "&cUsage: /bng <command>";
+    static void executeCommand(AbstractPlayer player, String[] args, AbstractEntity entity) {
+        if (!player.hasPermission(permissionBuilder(args))) {
+            player.sendMessage("§cYou do not have permission to use this command.");
+            return;
+        }
+        if (args.length == 0) {
+            player.sendMessage("&cUsage: /bng <command>");
+            return;
+        }
         String text = "&cUnknown command. Type \"/bng help\" for help.";
 
         switch (args[0].toLowerCase()) {
@@ -122,22 +130,35 @@ public interface BNGCommand {
                     }
                 }
                 break;
-        }
 
-        return text;
-    }
+            // Name a bee.
+            case "name":
+                if (args.length == 1) {
+                    text = "&cUsage: /bng name <auto|tag>";
+                } else {
+                    String name = "";
+                    switch (args[1].toLowerCase()) {
+                        // Automatically names a bee.
+                        case "auto":
+                            // Get a random bee name.
+                            name = (String) BeeNameGenerator.getBNGAPIHandler().getBeeName().get("name");
+                            entity.setCustomName(name);
+                            text = "&aSuccessfully named a bee " + name + "!";
+                            break;
 
-    static void executeCommand(AbstractPlayer player, boolean isPlayer, String[] args) {
-        if (isPlayer) {
-            if (!player.hasPermission(permissionBuilder(args))) {
-                player.sendMessage("§cYou do not have permission to use this command.");
-            } else {
-                player.sendMessage(executeCommand(args));
-            }
-        } else {
-            BeeNameGeneratorPlugin.useLogger(
-                    Utils.ansiiParser(
-                            PlaceholderParser.substituteSectionSign(executeCommand(args))));
+                        // Gives the player a name tag with a random bee name.
+                        case "tag":
+                            // Get a random bee name.
+                            name = (String) BeeNameGenerator.getBNGAPIHandler().getBeeName().get("name");
+
+                            // TODO: Add basic item handling to player abstraction
+
+                            text = "&aSuccessfully named a bee " + name + "!";
+                            break;
+                    }
+                }
+                break;
         }
+        player.sendMessage(text);
     }
 }

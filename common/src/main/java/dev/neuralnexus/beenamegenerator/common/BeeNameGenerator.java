@@ -129,7 +129,23 @@ public class BeeNameGenerator {
     }
 
     /**
+     * Get the radius from the config.
+     * @return The radius
+     */
+    public static int getRadius() {
+        return config.getInt("naming.radius");
+    }
+
+    /**
+     * Get the payment item from the config.
+     */
+    public static String getPaymentItem() {
+        return config.getString("naming.payment_item");
+    }
+
+    /**
      * Getter for the BeeNameGenerator API Handler
+     * @return The BeeNameGenerator API Handler
      */
     public static BNGAPIHandler getBNGAPIHandler() {
         return bngapiHandler;

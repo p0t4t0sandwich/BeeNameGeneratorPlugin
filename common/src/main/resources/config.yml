@@ -7,3 +7,7 @@ api:
 
   # Auth Token for the Bee Name Generator API
   auth_token: "YOUR_AUTH_TOKEN"
+
+naming:
+  radius: 10
+  payment_item: "minecraft:name_tag"

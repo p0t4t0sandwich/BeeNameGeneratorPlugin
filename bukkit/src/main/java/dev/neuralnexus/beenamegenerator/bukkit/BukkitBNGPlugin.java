@@ -2,6 +2,7 @@ package dev.neuralnexus.beenamegenerator.bukkit;
 
 import dev.neuralnexus.beenamegenerator.bukkit.commands.BukkitBNGCommand;
 import dev.neuralnexus.beenamegenerator.common.BeeNameGeneratorPlugin;
+import dev.neuralnexus.beenamegenerator.common.commands.BNGCommand;
 import dev.neuralnexus.taterlib.common.Utils;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -50,7 +51,7 @@ public class BukkitBNGPlugin extends JavaPlugin implements BeeNameGeneratorPlugi
      */
     @Override
     public void registerCommands() {
-        getCommand("bng").setExecutor(new BukkitBNGCommand());
+        getCommand(BNGCommand.getCommandName()).setExecutor(new BukkitBNGCommand());
     }
 
     /**
