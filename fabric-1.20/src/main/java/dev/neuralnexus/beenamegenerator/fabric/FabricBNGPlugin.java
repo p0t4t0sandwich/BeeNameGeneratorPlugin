@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * The ServerPanelManager Fabric plugin.
+ * The BeeNameGenerator Fabric plugin.
  */
 public class FabricBNGPlugin implements DedicatedServerModInitializer, BeeNameGeneratorPlugin {
     Logger logger = LogManager.getLogger("beenamegenerator");

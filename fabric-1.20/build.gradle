@@ -5,12 +5,6 @@ plugins {
     id('fabric-loom') version('1.3-SNAPSHOT')
 }
 
-repositories {
-    flatDir {
-        dirs('../TaterLib/target')
-    }
-}
-
 dependencies {
     implementation(project(path: ':common', configuration: 'shadow'))
 
@@ -31,7 +25,7 @@ dependencies {
     }
 
     // TaterLib
-    modImplementation(fileTree(dir: '../TaterLib/target', include: 'TaterLib-1.0.0-fabric-1.20.jar'))
+    modImplementation('dev.neuralnexus:TaterLib:1.0.0-1.20')
 }
 
 processResources {

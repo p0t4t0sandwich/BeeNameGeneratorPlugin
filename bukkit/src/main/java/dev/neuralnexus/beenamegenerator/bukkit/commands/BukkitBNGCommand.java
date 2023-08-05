@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Bukkit implementation of the SPM command.
+ * Bukkit implementation of the BNG command.
  */
 public class BukkitBNGCommand implements CommandExecutor {
     /**

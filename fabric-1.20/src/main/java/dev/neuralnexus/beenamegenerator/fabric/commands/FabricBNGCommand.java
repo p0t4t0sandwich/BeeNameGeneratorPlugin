@@ -2,6 +2,7 @@ package dev.neuralnexus.beenamegenerator.fabric.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import dev.neuralnexus.beenamegenerator.common.commands.BNGCommand;
 import dev.neuralnexus.taterlib.fabric.player.FabricPlayer;
 import dev.neuralnexus.taterlib.common.commands.TaterLibCommand;
 import dev.neuralnexus.taterlib.common.hooks.LuckPermsHook;
@@ -15,7 +16,7 @@ import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 /**
- * Fabric implementation of the SPM command.
+ * Fabric implementation of the BNG command.
  */
 public class FabricBNGCommand {
     /**
@@ -26,18 +27,15 @@ public class FabricBNGCommand {
      */
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
         int permissionLevel;
-        String commandName;
         if (environment.name().equals("DEDICATED")) {
             // Check if LuckPerms is hooked
             permissionLevel = LuckPermsHook.isHooked() ? 0 : 4;
-            commandName = "spm";
         } else {
             permissionLevel = 0;
-            commandName = "spmc";
         }
 
         // Register command
-        dispatcher.register(literal(commandName)
+        dispatcher.register(literal(BNGCommand.getCommandName())
                 .requires(source -> source.hasPermissionLevel(permissionLevel))
                 .then(argument("command", StringArgumentType.greedyString())
                         .executes(context -> {

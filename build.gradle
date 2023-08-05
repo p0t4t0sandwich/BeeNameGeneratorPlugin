@@ -41,6 +41,12 @@ subprojects {
             name = "papermc-repo"
             url = "https://repo.papermc.io/repository/maven-public/"
         }
+
+        // NeuralNexus
+        maven {
+            name = "NeuralNexus"
+            url = "https://maven.neuralnexus.dev/releases"
+        }
     }
 }
 

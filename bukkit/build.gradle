@@ -9,7 +9,7 @@ dependencies {
     compileOnly("org.spigotmc:spigot-api:${minecraft_version}-${bukkit_version}")
 
     // TaterLib
-    compileOnly(files("../../TaterLib/target/TaterLib-1.0.0-bukkit.jar"))
+    compileOnly('dev.neuralnexus:TaterLib:1.0.0-1.20')
 }
 
 java.disableAutoTargetJvm()

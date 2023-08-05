@@ -1,16 +1,13 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "dev.neuralnexus.serverpanelmanager.fabric.mixin",
+  "package": "dev.neuralnexus.beenamegenerator.fabric.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
   "client": [
   ],
   "server": [
-    "dev.neuralnexus.beenamegenerator.fabric.mixin.listeners.player.FabricPlayerAdvancementMixin",
-    "dev.neuralnexus.beenamegenerator.fabric.mixin.listeners.player.FabricPlayerDeathMixin",
-    "dev.neuralnexus.beenamegenerator.fabric.mixin.listeners.player.FabricPlayerMessageMixin"
   ],
   "injectors": {
     "defaultRequire": 1
