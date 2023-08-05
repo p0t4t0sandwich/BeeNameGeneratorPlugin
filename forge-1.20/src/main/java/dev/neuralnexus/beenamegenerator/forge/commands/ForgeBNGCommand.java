@@ -1,15 +1,25 @@
 package dev.neuralnexus.beenamegenerator.forge.commands;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
+import dev.neuralnexus.beenamegenerator.common.BeeNameGenerator;
 import dev.neuralnexus.beenamegenerator.common.commands.BNGCommand;
+import dev.neuralnexus.beenamegenerator.forge.abstractions.entity.ForgeEntity;
 import dev.neuralnexus.taterlib.common.Utils;
 import dev.neuralnexus.taterlib.common.hooks.LuckPermsHook;
 import dev.neuralnexus.taterlib.forge.player.ForgePlayer;
 import net.minecraft.commands.Commands;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.animal.Bee;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
@@ -36,24 +46,54 @@ public class ForgeBNGCommand {
         event.getDispatcher().register(literal(BNGCommand.getCommandName())
             .requires(source -> source.hasPermission(permissionLevel))
             .then(argument("command", StringArgumentType.greedyString())
-                .executes(context -> {
+            .executes(context -> {
+                try {
+                    String[] args = context.getArgument("command", String.class).split(" ");
+
+                    // Check if sender is a player
+                    if (!(context.getSource().getEntity() instanceof ServerPlayer)) return 1;
+                    ServerPlayer serverPlayer = (ServerPlayer) context.getSource().getEntity();
+                    ForgePlayer player = new ForgePlayer(serverPlayer);
+
+                    // Get the first bee Entity in the given radius
+                    int radius = BeeNameGenerator.getRadius();
+                    Entity bee = null;
+
+                    ServerLevel world = context.getSource().getLevel();
+
+                    List<Bee> bees = world.getEntities(
+                            EntityType.BEE,
+                            serverPlayer.getBoundingBox().inflate(radius, radius, radius),
+                            entity -> entity.getCustomName() == null
+                    );
+
+                    if (bees.size() > 0) {
+                        TargetingConditions predicate = TargetingConditions.forNonCombat().range(radius);
+                        bee = world.getNearestEntity(
+                                bees, predicate, serverPlayer,
+                                serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ()
+                        );
+                    }
+
+                    Entity finalBee = bee;
+                    AtomicInteger success = new AtomicInteger(1);
                     Utils.runTaskAsync(() -> {
                         try {
-                            String[] args = context.getArgument("command", String.class).split(" ");
-
-                            // Check if sender is a player
-                            boolean isPlayer = context.getSource().getEntity() instanceof ServerPlayer;
-                            ForgePlayer player = isPlayer ? new ForgePlayer((ServerPlayer) context.getSource().getEntity()) : null;
-
                             // Execute command
-                            BNGCommand.executeCommand(player, isPlayer, args);
+                            BNGCommand.executeCommand(player, args, new ForgeEntity(finalBee));
                         } catch (Exception e) {
-                            System.err.println(e);
+                            System.out.println(e);
                             e.printStackTrace();
+                            success.set(0);
                         }
                     });
-                    return 1;
-                })
-            ));
+                    return success.get();
+                } catch (Exception e) {
+                    System.err.println(e);
+                    e.printStackTrace();
+                    return 0;
+                }
+            })
+        ));
     }
 }

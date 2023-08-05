@@ -2,16 +2,25 @@ package dev.neuralnexus.beenamegenerator.fabric.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import dev.neuralnexus.beenamegenerator.common.BeeNameGenerator;
 import dev.neuralnexus.beenamegenerator.common.commands.BNGCommand;
+import dev.neuralnexus.beenamegenerator.fabric.abstractions.entity.FabricEntity;
+import dev.neuralnexus.taterlib.common.Utils;
 import dev.neuralnexus.taterlib.fabric.player.FabricPlayer;
-import dev.neuralnexus.taterlib.common.commands.TaterLibCommand;
 import dev.neuralnexus.taterlib.common.hooks.LuckPermsHook;
 import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.TargetPredicate;
+import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.world.World;
 
-import static dev.neuralnexus.taterlib.common.Utils.runTaskAsync;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
@@ -36,26 +45,56 @@ public class FabricBNGCommand {
 
         // Register command
         dispatcher.register(literal(BNGCommand.getCommandName())
-                .requires(source -> source.hasPermissionLevel(permissionLevel))
-                .then(argument("command", StringArgumentType.greedyString())
-                        .executes(context -> {
-                            runTaskAsync(() -> {
-                                try {
-                                    String[] args = context.getArgument("command", String.class).split(" ");
+                .requires(source -> source.hasPermissionLevel(permissionLevel)
+                ).then(argument("command", StringArgumentType.greedyString()
+                ).executes(context -> {
+                    try {
+                        String[] args = context.getArgument("command", String.class).split(" ");
 
-                                    // Check if sender is a player
-                                    boolean isPlayer = context.getSource().getEntity() instanceof ServerPlayerEntity;
-                                    FabricPlayer player = isPlayer ? new FabricPlayer((ServerPlayerEntity) context.getSource().getEntity()) : null;
+                        // Check if sender is a player
+                        if (!(context.getSource().getEntity() instanceof ServerPlayerEntity)) return 1;
+                        ServerPlayerEntity serverPlayer = (ServerPlayerEntity) context.getSource().getEntity();
+                        FabricPlayer player = new FabricPlayer(serverPlayer);
 
-                                    // Execute command
-                                    TaterLibCommand.executeCommand(player, isPlayer, args);
-                                } catch (Exception e) {
-                                    System.err.println(e);
-                                    e.printStackTrace();
-                                }
-                            });
-                            return 1;
-                        })
-                ));
+                        // Get the first bee Entity in the given radius
+                        int radius = BeeNameGenerator.getRadius();
+                        Entity bee = null;
+
+                        World world = serverPlayer.getWorld();
+
+                        List<BeeEntity> bees = world.getEntitiesByType(
+                                EntityType.BEE,
+                                serverPlayer.getBoundingBox().expand(radius, radius, radius),
+                                entity -> entity.getCustomName() == null
+                        );
+
+                        if (bees.size() > 0) {
+                            TargetPredicate predicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(radius);
+                            bee = world.getClosestEntity(
+                                    bees, predicate, serverPlayer,
+                                    serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ()
+                            );
+                        }
+
+                        Entity finalBee = bee;
+                        AtomicInteger success = new AtomicInteger(1);
+                        Utils.runTaskAsync(() -> {
+                            try {
+                                // Execute command
+                                BNGCommand.executeCommand(player, args, new FabricEntity(finalBee));
+                            } catch (Exception e) {
+                                System.out.println(e);
+                                e.printStackTrace();
+                                success.set(0);
+                            }
+                        });
+                        return success.get();
+                    } catch (Exception e) {
+                        System.err.println(e);
+                        e.printStackTrace();
+                        return 0;
+                    }
+                })
+            ));
     }
 }

@@ -23,33 +23,40 @@ public class BukkitBNGCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        AtomicBoolean success = new AtomicBoolean(true);
-        Utils.runTaskAsync(() -> {
-            try {
-                // Check if sender is a player
-                if (!(sender instanceof Player)) return;
+        try {
+            // Check if sender is a player
+            if (!(sender instanceof Player)) return true;
+            Player serverPlayer = (Player) sender;
+            BukkitPlayer player = new BukkitPlayer(serverPlayer);
 
-                BukkitPlayer player = new BukkitPlayer((Player) sender);
+            // Get the first bee Entity in the given radius
+            int radius = BeeNameGenerator.getRadius();
+            Entity bee = null;
 
-                // Get the first bee Entity in the given radius
-                int radius = BeeNameGenerator.getRadius();
-                Entity bee = null;
-                Collection<Entity> entities = ((Player) sender).getWorld().getNearbyEntities(((Player) sender).getLocation(), radius, radius, radius);
-                for (Entity entity : entities) {
-                    if (entity.getType().toString().equals("BEE") && entity.getCustomName() == null) {
-                        bee = entity;
-                        break;
-                    }
+            Collection<Entity> entities = serverPlayer.getWorld().getNearbyEntities(serverPlayer.getLocation(), radius, radius, radius);
+            for (Entity entity : entities) {
+                if (entity.getType().toString().equals("BEE") && entity.getCustomName() == null) {
+                    bee = entity;
+                    break;
                 }
-
-                // Execute command
-                BNGCommand.executeCommand(player, args, new BukkitEntity(bee));
-            } catch (Exception e) {
-                success.set(false);
-                System.err.println(e);
-                e.printStackTrace();
             }
-        });
-        return success.get();
+
+            Entity finalBee = bee;
+            AtomicBoolean success = new AtomicBoolean(true);
+            Utils.runTaskAsync(() -> {
+                try {
+                    // Execute command
+                    BNGCommand.executeCommand(player, args, new BukkitEntity(finalBee));
+                } catch (Exception e) {
+                    System.out.println(e);
+                    e.printStackTrace();
+                    success.set(false);
+                }
+            });
+            return success.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
