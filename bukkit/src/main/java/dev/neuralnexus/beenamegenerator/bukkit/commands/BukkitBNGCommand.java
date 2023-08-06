@@ -31,22 +31,22 @@ public class BukkitBNGCommand implements CommandExecutor {
 
             // Get the first bee Entity in the given radius
             int radius = BeeNameGenerator.getRadius();
-            Entity bee = null;
+            BukkitEntity bee = null;
 
             Collection<Entity> entities = serverPlayer.getWorld().getNearbyEntities(serverPlayer.getLocation(), radius, radius, radius);
             for (Entity entity : entities) {
                 if (entity.getType().toString().equals("BEE") && entity.getCustomName() == null) {
-                    bee = entity;
+                    bee = new BukkitEntity(entity);
                     break;
                 }
             }
 
-            Entity finalBee = bee;
+            BukkitEntity finalBee = bee;
             AtomicBoolean success = new AtomicBoolean(true);
             Utils.runTaskAsync(() -> {
                 try {
                     // Execute command
-                    BNGCommand.executeCommand(player, args, new BukkitEntity(finalBee));
+                    BNGCommand.executeCommand(player, args, finalBee);
                 } catch (Exception e) {
                     System.out.println(e);
                     e.printStackTrace();

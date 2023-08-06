@@ -58,7 +58,7 @@ public class FabricBNGCommand {
 
                         // Get the first bee Entity in the given radius
                         int radius = BeeNameGenerator.getRadius();
-                        Entity bee = null;
+                        FabricEntity bee = null;
 
                         World world = serverPlayer.getWorld();
 
@@ -70,18 +70,19 @@ public class FabricBNGCommand {
 
                         if (bees.size() > 0) {
                             TargetPredicate predicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(radius);
-                            bee = world.getClosestEntity(
+                            bee = new FabricEntity(
+                                world.getClosestEntity(
                                     bees, predicate, serverPlayer,
                                     serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ()
-                            );
+                            ));
                         }
 
-                        Entity finalBee = bee;
+                        FabricEntity finalBee = bee;
                         AtomicInteger success = new AtomicInteger(1);
                         Utils.runTaskAsync(() -> {
                             try {
                                 // Execute command
-                                BNGCommand.executeCommand(player, args, new FabricEntity(finalBee));
+                                BNGCommand.executeCommand(player, args, finalBee);
                             } catch (Exception e) {
                                 System.out.println(e);
                                 e.printStackTrace();

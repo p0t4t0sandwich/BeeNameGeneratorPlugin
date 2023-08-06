@@ -57,7 +57,7 @@ public class NeoForgeBNGCommand {
 
                         // Get the first bee Entity in the given radius
                         int radius = BeeNameGenerator.getRadius();
-                        Entity bee = null;
+                        ForgeEntity bee = null;
 
                         ServerLevel world = context.getSource().getLevel();
 
@@ -69,18 +69,19 @@ public class NeoForgeBNGCommand {
 
                         if (bees.size() > 0) {
                             TargetingConditions predicate = TargetingConditions.forNonCombat().range(radius);
-                            bee = world.getNearestEntity(
+                            bee = new ForgeEntity(
+                                world.getNearestEntity(
                                     bees, predicate, serverPlayer,
                                     serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ()
-                            );
+                            ));
                         }
 
-                        Entity finalBee = bee;
+                        ForgeEntity finalBee = bee;
                         AtomicInteger success = new AtomicInteger(1);
                         Utils.runTaskAsync(() -> {
                             try {
                                 // Execute command
-                                BNGCommand.executeCommand(player, args, new ForgeEntity(finalBee));
+                                BNGCommand.executeCommand(player, args, finalBee);
                             } catch (Exception e) {
                                 System.out.println(e);
                                 e.printStackTrace();
