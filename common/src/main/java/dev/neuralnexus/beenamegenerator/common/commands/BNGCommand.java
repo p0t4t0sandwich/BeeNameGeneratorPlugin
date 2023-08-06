@@ -1,11 +1,8 @@
 package dev.neuralnexus.beenamegenerator.common.commands;
 
 import dev.neuralnexus.beenamegenerator.common.BeeNameGenerator;
-import dev.neuralnexus.beenamegenerator.common.BeeNameGeneratorPlugin;
-import dev.neuralnexus.beenamegenerator.common.abstractions.entity.AbstractEntity;
-import dev.neuralnexus.taterlib.common.Utils;
-import dev.neuralnexus.taterlib.common.placeholder.PlaceholderParser;
-import dev.neuralnexus.taterlib.common.player.AbstractPlayer;
+import dev.neuralnexus.taterlib.common.abstractions.entity.AbstractEntity;
+import dev.neuralnexus.taterlib.common.abstractions.player.AbstractPlayer;
 
 import java.util.Map;
 
@@ -140,6 +137,8 @@ public interface BNGCommand {
                     switch (args[1].toLowerCase()) {
                         // Automatically names a bee.
                         case "auto":
+                            // TODO: Check to see if the player's inventory has a name tag.
+
                             // Get a random bee name.
                             name = (String) BeeNameGenerator.getBNGAPIHandler().getBeeName().get("name");
                             entity.setCustomName(name);

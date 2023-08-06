@@ -1,9 +1,9 @@
 package dev.neuralnexus.beenamegenerator.bukkit.commands;
 
-import dev.neuralnexus.beenamegenerator.bukkit.abstractions.entity.BukkitEntity;
 import dev.neuralnexus.beenamegenerator.common.BeeNameGenerator;
 import dev.neuralnexus.beenamegenerator.common.commands.BNGCommand;
-import dev.neuralnexus.taterlib.bukkit.player.BukkitPlayer;
+import dev.neuralnexus.taterlib.bukkit.abstractions.entity.BukkitEntity;
+import dev.neuralnexus.taterlib.bukkit.abstractions.player.BukkitPlayer;
 import dev.neuralnexus.taterlib.common.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

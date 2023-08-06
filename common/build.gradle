@@ -3,11 +3,8 @@ plugins {
 }
 
 dependencies {
-    // LuckPerms
-    compileOnly("net.luckperms:api:5.4")
-
     // TaterLib
-    compileOnly(files("../../TaterLib/target/TaterLib-1.0.0-1.20.jar"))
+    compileOnly('dev.neuralnexus:TaterLib:1.0.0-1.20')
 }
 
 shadowJar {

@@ -3,10 +3,10 @@ package dev.neuralnexus.beenamegenerator.neoforge.commands;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import dev.neuralnexus.beenamegenerator.common.BeeNameGenerator;
 import dev.neuralnexus.beenamegenerator.common.commands.BNGCommand;
-import dev.neuralnexus.beenamegenerator.neoforge.abstractions.entity.NeoForgeEntity;
 import dev.neuralnexus.taterlib.common.Utils;
 import dev.neuralnexus.taterlib.common.hooks.LuckPermsHook;
-import dev.neuralnexus.taterlib.forge.player.ForgePlayer;
+import dev.neuralnexus.taterlib.forge.abstrations.entity.ForgeEntity;
+import dev.neuralnexus.taterlib.forge.abstrations.player.ForgePlayer;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -80,7 +80,7 @@ public class NeoForgeBNGCommand {
                         Utils.runTaskAsync(() -> {
                             try {
                                 // Execute command
-                                BNGCommand.executeCommand(player, args, new NeoForgeEntity(finalBee));
+                                BNGCommand.executeCommand(player, args, new ForgeEntity(finalBee));
                             } catch (Exception e) {
                                 System.out.println(e);
                                 e.printStackTrace();
