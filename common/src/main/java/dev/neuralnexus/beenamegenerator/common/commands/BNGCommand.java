@@ -50,6 +50,7 @@ public interface BNGCommand {
                 text = "\n&6Available commands:" +
                     "\n&6/bng help &a- Shows all available commands." +
                     "\n&6/bng reload &a- Reloads the plugin." +
+                    "\n&6/bng name &a- Name a bee." +
                     "\n&6/bng get &a- Gets a random bee name." +
                     "\n&6/bng add &a- Adds a bee name to the database." +
                     "\n&6/bng suggest &a- Suggests a bee name." +
