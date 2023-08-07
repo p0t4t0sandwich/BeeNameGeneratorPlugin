@@ -1,0 +1,65 @@
+import org.spongepowered.gradle.plugin.config.PluginLoaders
+import org.spongepowered.plugin.metadata.model.PluginDependency
+
+plugins {
+    id('com.github.johnrengelman.shadow') version('8.1.1')
+    id('java-library')
+    id("org.spongepowered.gradle.plugin") version('2.1.1')
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+sponge {
+    apiVersion(spongeapi_version)
+    license("GPL-3.0")
+    loader {
+        name(PluginLoaders.JAVA_PLAIN)
+        version("1.0")
+    }
+    plugin("beenamegenerator") {
+        displayName("BeeNameGenerator")
+        entrypoint("dev.neuralnexus.taterlib.sponge.SpongeBNGPlugin")
+        description("A plugin that implements the bee-name-generator API to generate names for bees.")
+        links {
+             homepage("https://github.com/p0t4t0sandwich/TaterLib#taterapi")
+             source("https://github.com/p0t4t0sandwich/TaterLib")
+             issues("https://github.com/p0t4t0sandwich/TaterLib/issues")
+        }
+        dependency("spongeapi") {
+            loadOrder(PluginDependency.LoadOrder.AFTER)
+            optional(false)
+        }
+        dependency("taterlib") {
+            version("1.0.0")
+            loadOrder(PluginDependency.LoadOrder.AFTER)
+            optional(false)
+        }
+    }
+}
+
+dependencies {
+    implementation(project(path: ':common', configuration: 'shadow'))
+
+    // TaterLib
+    compileOnly('dev.neuralnexus:TaterLib:1.0.0-sponge8')
+}
+
+shadowJar {
+    dependencies {
+        include(project(":common"))
+    }
+
+    destinationDirectory = file('../target')
+    archiveFileName = "BeeNameGenerator-${version}-sponge8.jar"
+}
+shadowJar.doLast {
+    task ->
+        ant.checksum(file: task.archivePath) {
+            hashAlgorithm = 'md5'
+            property = 'md5sum'
+        }
+}
+
+artifacts {
+    archives(shadowJar)
+}
