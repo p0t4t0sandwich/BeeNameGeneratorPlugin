@@ -33,6 +33,7 @@ public class BukkitBNGCommand implements CommandExecutor {
             int radius = BeeNameGenerator.getRadius();
             BukkitEntity bee = null;
 
+            // Get nearby entities
             Collection<Entity> entities = serverPlayer.getWorld().getNearbyEntities(serverPlayer.getLocation(), radius, radius, radius);
             for (Entity entity : entities) {
                 if (entity.getType().toString().equals("BEE") && entity.getCustomName() == null) {

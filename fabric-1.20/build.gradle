@@ -21,8 +21,11 @@ dependencies {
     ]
 
     apiModules.forEach {
+        println(fabricApi.module(it, project.fabric_version))
         modImplementation(fabricApi.module(it, project.fabric_version))
     }
+
+//    modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
 
     // TaterLib
     modImplementation('dev.neuralnexus:TaterLib:1.0.0-1.20')
