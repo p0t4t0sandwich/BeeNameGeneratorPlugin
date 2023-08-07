@@ -26,7 +26,7 @@ function build() {
   cp ./fabric-$1/fabric.mod.json ./$3
   cp ./fabric-$1/$PROJ_ID.mixins.json ./$3
   cp -r ./fabric-$1/assets ./$3
-  cp ./fabric-$1/$PROJ_NAME-refmap.json ./$3
+  cp ./fabric-$1/fabric-$1-refmap.json ./$3
 
   # Copy forge files
   cp -r ./forge-$2/$GROUP_ID/$PROJ_ID/forge ./$3/$GROUP_ID/$PROJ_ID
@@ -98,141 +98,19 @@ cp ../../LICENSE-API ./$PROJ_NAME-all
 cp ../../README.md ./$PROJ_NAME-all
 rm -rf ./common
 
-# Prepare standalone files
-prepareFiles standalone
-
-# Copy standalone files
-mv ./standalone/$GROUP_ID/$PROJ_ID/standalone ./$PROJ_NAME-all/$GROUP_ID/$PROJ_ID
-mkdir -p ./$PROJ_NAME-all/META-INF
-echo "Manifest-Version: 1.0" > ./$PROJ_NAME-all/META-INF/MANIFEST.MF
-echo "Main-Class: dev.neuralnexus.serverpanelmanager.standalone.StandaloneMain" >> ./$PROJ_NAME-all/META-INF/MANIFEST.MF
-rm -rf ./standalone
-
 # --------------------------- Prepare Forge and Fabric --------------------------------
-
-## Prepare Fabric 1.14 files
-#FABRIC_VERSION=1.14
-#prepareFiles fabric-$FABRIC_VERSION
-#
-## Prepare Fabric 1.15 files
-#FABRIC_VERSION=1.15
-#prepareFiles fabric-$FABRIC_VERSION
-#
-## Prepare Fabric 1.16 files
-#FABRIC_VERSION=1.16
-#prepareFiles fabric-$FABRIC_VERSION
-#
-## Prepare Fabric 1.17 files
-#FABRIC_VERSION=1.17
-#prepareFiles fabric-$FABRIC_VERSION
 
 # Prepare Fabric 1.20 files
 FABRIC_VERSION=1.20
 prepareFiles fabric-$FABRIC_VERSION
-
-## Prepare Forge 1.12 files
-#FORGE_VERSION=1.12
-#prepareFiles forge-$FORGE_VERSION
-#
-## Prepare Forge 1.13 files
-#FORGE_VERSION=1.13
-#prepareFiles forge-$FORGE_VERSION
-#
-## Prepare Forge 1.14 files
-#FORGE_VERSION=1.14
-#prepareFiles forge-$FORGE_VERSION
-#
-## Prepare Forge 1.15 files
-#FORGE_VERSION=1.15
-#prepareFiles forge-$FORGE_VERSION
-#
-## Prepare Forge 1.16 files
-#FORGE_VERSION=1.16
-#prepareFiles forge-$FORGE_VERSION
-#
-## Prepare Forge 1.17 files
-#FORGE_VERSION=1.17
-#prepareFiles forge-$FORGE_VERSION
-#
-## Prepare Forge 1.18 files
-#FORGE_VERSION=1.18
-#prepareFiles forge-$FORGE_VERSION
-#
-## Prepare Forge 1.19 files
-#FORGE_VERSION=1.19
-#prepareFiles forge-$FORGE_VERSION
 
 # Prepare Forge 1.20 files
 FORGE_VERSION=1.20
 prepareFiles forge-$FORGE_VERSION
 
 # Prepare NeoForge 1.20.1 files
-FORGE_VERSION=1.20.1
-prepareFiles forge-$FORGE_VERSION
-
-# --------------------------- Build 1.12 --------------------------------
-MC_VERSION=1.12
-FABRIC_VERSION=NA
-FORGE_VERSION=1.12
-OUT_FILE=$PROJ_NAME-$VERSION-$MC_VERSION
-
-#build $FABRIC_VERSION $FORGE_VERSION $OUT_FILE
-
-# --------------------------- Build 1.13 --------------------------------
-MC_VERSION=1.13
-FABRIC_VERSION=NA
-FORGE_VERSION=1.13
-OUT_FILE=$PROJ_NAME-$VERSION-$MC_VERSION
-
-#build $FABRIC_VERSION $FORGE_VERSION $OUT_FILE
-
-# --------------------------- Build 1.14 --------------------------------
-MC_VERSION=1.14
-FABRIC_VERSION=1.14
-FORGE_VERSION=1.14
-OUT_FILE=$PROJ_NAME-$VERSION-$MC_VERSION
-
-#build $FABRIC_VERSION $FORGE_VERSION $OUT_FILE
-
-# --------------------------- Build 1.15 --------------------------------
-MC_VERSION=1.15
-FABRIC_VERSION=1.15
-FORGE_VERSION=1.15
-OUT_FILE=$PROJ_NAME-$VERSION-$MC_VERSION
-
-#build $FABRIC_VERSION $FORGE_VERSION $OUT_FILE
-
-# --------------------------- Build 1.16 --------------------------------
-MC_VERSION=1.16
-FABRIC_VERSION=1.16
-FORGE_VERSION=1.16
-OUT_FILE=$PROJ_NAME-$VERSION-$MC_VERSION
-
-#build $FABRIC_VERSION $FORGE_VERSION $OUT_FILE
-
-# --------------------------- Build 1.17 --------------------------------
-MC_VERSION=1.17
-FABRIC_VERSION=1.17
-FORGE_VERSION=1.17
-OUT_FILE=$PROJ_NAME-$VERSION-$MC_VERSION
-
-#build $FABRIC_VERSION $FORGE_VERSION $OUT_FILE
-
-# --------------------------- Build 1.18 --------------------------------
-MC_VERSION=1.18
-FABRIC_VERSION=1.17
-FORGE_VERSION=1.18
-OUT_FILE=$PROJ_NAME-$VERSION-$MC_VERSION
-
-#build $FABRIC_VERSION $FORGE_VERSION $OUT_FILE
-
-# --------------------------- Build 1.19 --------------------------------
-MC_VERSION=1.19
-FABRIC_VERSION=1.17
-FORGE_VERSION=1.19
-OUT_FILE=$PROJ_NAME-$VERSION-$MC_VERSION
-
-#build $FABRIC_VERSION $FORGE_VERSION $OUT_FILE
+NEOFORGE_VERSION=1.20.1
+prepareFiles neoforge-$NEOFORGE_VERSION
 
 # --------------------------- Build 1.20 --------------------------------
 MC_VERSION=1.20

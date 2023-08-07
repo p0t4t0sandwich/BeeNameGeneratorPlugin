@@ -2,25 +2,18 @@ package dev.neuralnexus.beenamegenerator.fabric;
 
 import dev.neuralnexus.beenamegenerator.common.BeeNameGeneratorPlugin;
 import dev.neuralnexus.beenamegenerator.fabric.commands.FabricBNGCommand;
-import net.fabricmc.api.DedicatedServerModInitializer;
+import dev.neuralnexus.taterlib.common.abstractions.logger.AbstractLogger;
+import dev.neuralnexus.taterlib.fabric.TemplateFabricPlugin;
+import dev.neuralnexus.taterlib.fabric.abstractions.logger.FabricLogger;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The BeeNameGenerator Fabric plugin.
  */
-public class FabricBNGPlugin implements DedicatedServerModInitializer, BeeNameGeneratorPlugin {
-    Logger logger = LogManager.getLogger("beenamegenerator");
-
-    /**
-     * Use whatever logger is being used.
-     * @param message The message to log
-     */
-    public void useLogger(String message) {
-        logger.info("[BeeNameGenerator] " + message);
-    }
+public class FabricBNGPlugin extends TemplateFabricPlugin implements BeeNameGeneratorPlugin {
+    private static final String MOD_ID = "beenamegenerator";
 
     /**
      * @inheritDoc
@@ -34,8 +27,8 @@ public class FabricBNGPlugin implements DedicatedServerModInitializer, BeeNameGe
      * @inheritDoc
      */
     @Override
-    public String getServerType() {
-        return "Fabric";
+    public AbstractLogger pluginLogger() {
+        return new FabricLogger( "[TaterLib] ", LoggerFactory.getLogger(MOD_ID));
     }
 
     /**

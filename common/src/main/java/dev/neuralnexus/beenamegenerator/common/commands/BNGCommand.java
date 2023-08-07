@@ -189,7 +189,7 @@ public interface BNGCommand {
                             for (int i = 0; i < player.getInventory().getSize(); i++) {
                                 AbstractItemStack item = player.getInventory().getItem(i);
 
-                                text = "&6Error: &cYou do not have any blank &6Name Tag &cs in your inventory.";
+                                text = "&6Error: &cYou do not have any blank &6Name Tag&cs in your inventory.";
 
                                 if (item != null && !item.getMeta().hasDisplayName() && item.getType().equals("minecraft:name_tag")) {
                                     if (item.getCount() == 1) {
@@ -209,7 +209,7 @@ public interface BNGCommand {
                                         player.getInventory().setItem(i, item);
 
                                         // Give the player a new name tag with the random bee name.
-                                        AbstractItemStack newItem = item;
+                                        AbstractItemStack newItem = item.clone();
                                         AbstractItemMeta newItemMeta = newItem.getMeta();
                                         newItemMeta.setDisplayName(name);
                                         newItem.setMeta(newItemMeta);

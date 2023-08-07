@@ -3,10 +3,11 @@ package dev.neuralnexus.beenamegenerator.neoforge.commands;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import dev.neuralnexus.beenamegenerator.common.BeeNameGenerator;
 import dev.neuralnexus.beenamegenerator.common.commands.BNGCommand;
-import dev.neuralnexus.taterlib.common.Utils;
+import dev.neuralnexus.beenamegenerator.neoforge.NeoForgeBNGPlugin;
 import dev.neuralnexus.taterlib.common.hooks.LuckPermsHook;
 import dev.neuralnexus.taterlib.forge.abstrations.entity.ForgeEntity;
 import dev.neuralnexus.taterlib.forge.abstrations.player.ForgePlayer;
+import net.minecraft.Util;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,7 +27,7 @@ import static net.minecraft.commands.Commands.literal;
 /**
  * NeoForge implementation of the BNG command.
  */
-@Mod.EventBusSubscriber(modid = "beenamegenerator")
+@Mod.EventBusSubscriber(modid = NeoForgeBNGPlugin.MOD_ID)
 public class NeoForgeBNGCommand {
     /**
      * Registers the command.
@@ -77,7 +78,7 @@ public class NeoForgeBNGCommand {
 
                         ForgeEntity finalBee = bee;
                         AtomicInteger success = new AtomicInteger(1);
-                        Utils.runTaskAsync(() -> {
+                        Util.backgroundExecutor().submit(() -> {
                             try {
                                 // Execute command
                                 BNGCommand.executeCommand(player, args, finalBee);

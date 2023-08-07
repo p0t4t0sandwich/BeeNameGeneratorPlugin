@@ -1,55 +1,29 @@
 package dev.neuralnexus.beenamegenerator.neoforge;
 
+import com.mojang.logging.LogUtils;
 import dev.neuralnexus.beenamegenerator.common.BeeNameGeneratorPlugin;
 import dev.neuralnexus.beenamegenerator.neoforge.commands.NeoForgeBNGCommand;
+import dev.neuralnexus.taterlib.common.abstractions.logger.AbstractLogger;
+import dev.neuralnexus.taterlib.forge.TemplateForgePlugin;
+import dev.neuralnexus.taterlib.neoforge.abstractions.logger.NeoForgeLogger;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.loading.FMLLoader;
-import net.minecraftforge.fml.loading.VersionInfo;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
- * The BeeNameGenerator NeoForge plugin.
+ * The BeeNameGenerator Forge plugin.
  */
-@Mod("beenamegenerator")
-public class NeoForgeBNGPlugin implements BeeNameGeneratorPlugin {
-    Logger logger = LogManager.getLogger("beenamegenerator");
-
-    /**
-     * Use whatever logger is being used.
-     * @param message The message to log
-     */
-    public void useLogger(String message) {
-        logger.info("[BeeNameGenerator] " + message);
-    }
+@Mod(NeoForgeBNGPlugin.MOD_ID)
+public class NeoForgeBNGPlugin extends TemplateForgePlugin implements BeeNameGeneratorPlugin {
+    public static final String MOD_ID = "beenamegenerator";
 
     /**
      * @inheritDoc
      */
     @Override
-    public String pluginConfigPath() {
-        return "config";
-    }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public String getServerType() {
-        return "NeoForge";
-    }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public String getServerVersion() {
-        VersionInfo versionInfo = FMLLoader.versionInfo();
-        return versionInfo.mcAndForgeVersion();
+    public AbstractLogger pluginLogger() {
+        return new NeoForgeLogger(LogUtils.getLogger());
     }
 
     /**
@@ -57,13 +31,6 @@ public class NeoForgeBNGPlugin implements BeeNameGeneratorPlugin {
      */
     @Override
     public void registerHooks() {}
-
-    /**
-     * Called when the server is starting.
-     * @param event The event.
-     */
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {}
 
     /**
      * @inheritDoc

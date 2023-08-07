@@ -2,26 +2,19 @@ package dev.neuralnexus.beenamegenerator.common;
 
 import dev.neuralnexus.beenamegenerator.common.api.BeeNameGeneratorAPIProvider;
 import dev.neuralnexus.beenamegenerator.common.bngapi.BNGAPIHandler;
-import dev.neuralnexus.taterlib.lib.dejvokep.boostedyaml.YamlDocument;
+import dev.dejvokep.boostedyaml.YamlDocument;
+import dev.neuralnexus.taterlib.common.TaterLib;
+import dev.neuralnexus.taterlib.common.abstractions.logger.AbstractLogger;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
 public class BeeNameGenerator {
-    /**
-     * Properties of the BeeNameGenerator class.
-     * instance: The singleton instance of the BeeNameGenerator class
-     * config: The config file
-     * logger: The logger
-     * configPath: The path to the config file
-     * STARTED: Whether the PanelServerManager has been started
-     * hooks: The hooks
-     * bngapiHandler: The BNGAPIHandler
-     */
     private static final BeeNameGenerator instance = new BeeNameGenerator();
     private static YamlDocument config;
     private static String configPath;
+    private static AbstractLogger logger;
     private static boolean STARTED = false;
     private static final ArrayList<Object> hooks = new ArrayList<>();
     private static BNGAPIHandler bngapiHandler = null;
@@ -51,8 +44,9 @@ public class BeeNameGenerator {
      * Start BeeNameGenerator
      * @param configPath The path to the config file
      */
-    public static void start(String configPath) {
+    public static void start(String configPath, AbstractLogger logger) {
         BeeNameGenerator.configPath = configPath;
+        TaterLib.logger = logger;
 
         // Config
         try {
@@ -61,12 +55,12 @@ public class BeeNameGenerator {
             );
             config.reload();
         } catch (IOException | NullPointerException e) {
-            BeeNameGeneratorPlugin.useLogger("Failed to load config.yml!\n" + e.getMessage());
+            logger.info("Failed to load config.yml!\n" + e.getMessage());
             e.printStackTrace();
         }
 
         if (STARTED) {
-            BeeNameGeneratorPlugin.useLogger("BeeNameGenerator has already started!");
+            logger.info("BeeNameGenerator has already started!");
             return;
         }
         STARTED = true;
@@ -77,11 +71,11 @@ public class BeeNameGenerator {
         if (authToken == null || authToken.equals("") || authToken.equals("YOUR_AUTH_TOKEN")) {
             bngapiHandler = new BNGAPIHandler(baseURL);
         } else {
-            BeeNameGeneratorPlugin.useLogger("Using auth token: " + authToken);
+            logger.info("Using auth token: " + authToken);
             bngapiHandler = new BNGAPIHandler(baseURL, authToken);
         }
 
-        BeeNameGeneratorPlugin.useLogger("BeeNameGenerator has been started!");
+        logger.info("BeeNameGenerator has been started!");
         BeeNameGeneratorAPIProvider.register(instance);
     }
 
@@ -89,7 +83,7 @@ public class BeeNameGenerator {
      * Start TaterAPI
      */
     public static void start() {
-        start(configPath);
+        start(configPath, logger);
     }
 
     /**
@@ -97,12 +91,12 @@ public class BeeNameGenerator {
      */
     public static void stop() {
         if (!STARTED) {
-            BeeNameGeneratorPlugin.useLogger("BeeNameGenerator has already stopped!");
+            logger.info("BeeNameGenerator has already stopped!");
             return;
         }
         STARTED = false;
 
-        BeeNameGeneratorPlugin.useLogger("BeeNameGenerator has been stopped!");
+        logger.info("BeeNameGenerator has been stopped!");
         BeeNameGeneratorAPIProvider.unregister();
     }
 
@@ -111,7 +105,7 @@ public class BeeNameGenerator {
      */
     public static void reload() {
         if (!STARTED) {
-            BeeNameGeneratorPlugin.useLogger("BeeNameGenerator has not been started!");
+            logger.info("BeeNameGenerator has not been started!");
             return;
         }
 
@@ -123,9 +117,9 @@ public class BeeNameGenerator {
         stop();
 
         // Start BeeNameGenerator
-        start(configPath);
+        start(configPath, logger);
 
-        BeeNameGeneratorPlugin.useLogger("BeeNameGenerator has been reloaded!");
+        logger.info("BeeNameGenerator has been reloaded!");
     }
 
     /**
