@@ -2,9 +2,9 @@ package dev.neuralnexus.beenamegenerator.common;
 
 import dev.neuralnexus.beenamegenerator.common.api.BeeNameGeneratorAPIProvider;
 import dev.neuralnexus.beenamegenerator.common.bngapi.BNGAPIHandler;
-import dev.dejvokep.boostedyaml.YamlDocument;
 import dev.neuralnexus.taterlib.common.TaterLib;
 import dev.neuralnexus.taterlib.common.abstractions.logger.AbstractLogger;
+import dev.neuralnexus.taterlib.lib.dejvokep.boostedyaml.YamlDocument;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,12 +50,12 @@ public class BeeNameGenerator {
 
         // Config
         try {
-            config = YamlDocument.create(new File("." + File.separator + configPath + File.separator + "BeeNameGenerator", "config.yml"),
-                    Objects.requireNonNull(BeeNameGenerator.class.getClassLoader().getResourceAsStream("config.yml"))
+            config = YamlDocument.create(new File("." + File.separator + configPath + File.separator + "BeeNameGenerator", "beenamegenerator.config.yml"),
+                    Objects.requireNonNull(BeeNameGenerator.class.getClassLoader().getResourceAsStream("beenamegenerator.config.yml"))
             );
             config.reload();
         } catch (IOException | NullPointerException e) {
-            logger.info("Failed to load config.yml!\n" + e.getMessage());
+            logger.info("Failed to load beenamegenerator.config.yml!\n" + e.getMessage());
             e.printStackTrace();
         }
 
