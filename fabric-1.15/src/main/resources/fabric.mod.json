@@ -30,7 +30,8 @@
   "depends": {
     "fabricloader": ">=0.9.0",
     "minecraft": ">=${minecraft_version}",
-    "fabric-command-api-v2": "*",
+    "fabric-api-base": "*",
+    "fabric-command-api-v1": "*",
     "fabric-lifecycle-events-v1": "*",
     "taterlib": "*"
   }

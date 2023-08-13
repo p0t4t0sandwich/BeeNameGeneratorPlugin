@@ -1,0 +1,44 @@
+plugins {
+    id('com.github.johnrengelman.shadow') version('8.1.1')
+    id('net.minecraftforge.gradle') version('[6.0,6.2)')
+    id('org.parchmentmc.librarian.forgegradle') version('1.+')
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+minecraft {
+    mappings(channel: 'snapshot', version: mappings_version)
+}
+
+dependencies {
+    implementation(project(path: ':common', configuration: 'shadow'))
+    minecraft("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
+
+    // TaterLib
+    compileOnly(fg.deobf('dev.neuralnexus:TaterLib:1.0.0-1.16'))
+}
+
+reobf {
+    shadowJar {}
+}
+
+shadowJar {
+    dependencies {
+        include(project(':common'))
+    }
+
+    destinationDirectory = file('../target')
+    archiveFileName = "BeeNameGenerator-${version}-forge-${minecraft_version}.jar"
+}
+shadowJar.doLast {
+    task ->
+        ant.checksum(file: task.archivePath) {
+            hashAlgorithm = 'md5'
+            property = 'md5sum'
+        }
+}
+
+artifacts {
+    archives(shadowJar)
+}

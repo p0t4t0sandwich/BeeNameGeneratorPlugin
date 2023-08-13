@@ -1,6 +1,6 @@
 # https://files.minecraftforge.net/net/minecraftforge/forge/
 modLoader = "javafml"
-loaderVersion = "[46,)"
+loaderVersion = "[38,)"
 license = "GPL-3"
 issueTrackerURL="https://github.com/p0t4t0sandwich/BeeNameGenerator/issues"
 
@@ -22,7 +22,7 @@ A plugin that implements the bee-name-generator API to generate names for bees.
 [[dependencies.beenamegenerator]]
 modId = "forge"
 mandatory = true
-versionRange = "[46,)"
+versionRange = "[38,)"
 ordering = "NONE"
 side = "BOTH"
 
@@ -30,22 +30,22 @@ side = "BOTH"
 [[dependencies.beenamegenerator]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20,1.21)"
+versionRange = "[1.18,1.19)"
 ordering = "NONE"
 side = "BOTH"
-
-# TaterLib Dependency
-[[dependencies.beenamegenerator]]
-modId = "taterlib"
-mandatory = true
-versionRange = "[1.0.0,)"
-ordering = "NONE"
-side = "SERVER"
 
 # LuckPerms Dependency
 [[dependencies.beenamegenerator]]
 modId = "luckperms"
 mandatory = false
 versionRange = "[5.3.0,)"
+ordering = "NONE"
+side = "SERVER"
+
+# TaterLib Dependency
+[[dependencies.beenamegenerator]]
+modId = "taterlib"
+mandatory = true
+versionRange = "[1.0.0,)"
 ordering = "NONE"
 side = "SERVER"
