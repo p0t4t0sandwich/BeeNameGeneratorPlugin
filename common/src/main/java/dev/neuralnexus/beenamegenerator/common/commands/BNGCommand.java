@@ -73,7 +73,7 @@ public interface BNGCommand {
             // Gets a random bee name.
             case "get":
                 Map<?, ?> res = BeeNameGenerator.getBNGAPIHandler().getBeeName();
-                text = "&a" + res.get("name");
+                text = "&6Bee Name: &a" + res.get("name");
                 break;
 
             // Adds a bee name to the database.

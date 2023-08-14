@@ -69,9 +69,9 @@ public class SpongeBNGCommand implements CommandExecutor {
             SpongeEntity bee = null;
 
             // Get all bees in the world
-            List<Entity> bees = new ArrayList<>(serverPlayer.world().entities());//.stream()
-//                    .filter(entity -> entity.type().toString().equals("BEE") && !entity.customName().isPresent())
-//                    .collect(Collectors.toList());
+            List<Entity> bees = new ArrayList<>(serverPlayer.world().entities()).stream()
+                    .filter(entity -> entity.type().toString().equals("entity.minecraft.bee") && !entity.customName().isPresent())
+                    .collect(Collectors.toList());
 
             // Get the closest bee
             double px = serverPlayer.location().x();
