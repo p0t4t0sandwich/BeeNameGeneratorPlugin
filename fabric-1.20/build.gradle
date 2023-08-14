@@ -25,7 +25,7 @@ dependencies {
     }
 
     // TaterLib
-    modImplementation('dev.neuralnexus:TaterLib:1.0.0-1.20')
+    modImplementation('dev.neuralnexus:TaterLib:1.0.1-1.20')
 }
 
 processResources {

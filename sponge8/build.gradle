@@ -41,7 +41,7 @@ dependencies {
     implementation(project(path: ':common', configuration: 'shadow'))
 
     // TaterLib
-    compileOnly('dev.neuralnexus:TaterLib:1.0.0-sponge8')
+    compileOnly('dev.neuralnexus:TaterLib:1.0.1-1.16')
 }
 
 shadowJar {

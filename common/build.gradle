@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
     // TaterLib
-    compileOnly('dev.neuralnexus:TaterLib:1.0.0-1.20')
+    compileOnly('dev.neuralnexus:TaterLib:1.0.1-1.20')
 }
 
 shadowJar {
