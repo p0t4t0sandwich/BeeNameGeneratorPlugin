@@ -215,13 +215,6 @@ do
     prepareFiles neoforge-$NEOFORGE_VERSION
 done
 
-# --------------------------- Build 1.14 --------------------------------
-MC_VERSION=1.14
-FABRIC_VERSION=1.14
-FORGE_VERSION=1.14.3
-OUT_FILE=$PROJ_NAME-$VERSION-$MC_VERSION
-build $FABRIC_VERSION $FORGE_VERSION $OUT_FILE
-
 # --------------------------- Build 1.15 --------------------------------
 MC_VERSION=1.15
 FABRIC_VERSION=1.15

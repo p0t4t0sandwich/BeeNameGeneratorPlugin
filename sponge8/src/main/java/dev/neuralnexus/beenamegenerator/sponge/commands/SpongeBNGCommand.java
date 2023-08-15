@@ -92,7 +92,7 @@ public class SpongeBNGCommand implements CommandExecutor {
             }
 
             SpongeEntity finalBee = bee;
-            Utils.runTaskAsync(() -> {
+//            Utils.runTaskAsync(() -> {
                 try {
                     // Execute command
                     BNGCommand.executeCommand(player, args, finalBee);
@@ -100,7 +100,7 @@ public class SpongeBNGCommand implements CommandExecutor {
                     e.printStackTrace();
                     System.out.println(e);
                 }
-            });
+//            });
         } catch (Exception e) {
             e.printStackTrace();
             return CommandResult.builder()

@@ -1,5 +1,6 @@
 package dev.neuralnexus.beenamegenerator.common.commands;
 
+import dev.neuralnexus.beenamegenerator.common.BNGUtils;
 import dev.neuralnexus.beenamegenerator.common.BeeNameGenerator;
 import dev.neuralnexus.taterlib.common.abstractions.entity.AbstractEntity;
 import dev.neuralnexus.taterlib.common.abstractions.item.AbstractItemMeta;
@@ -137,89 +138,15 @@ public interface BNGCommand {
                 if (args.length == 1) {
                     text = "&cUsage: /bng name <auto|tag>";
                 } else {
-                    String name;
                     switch (args[1].toLowerCase()) {
                         // Automatically names a bee.
                         case "auto":
-                            // Check to see if bee is null.
-                            if (entity == null) {
-                                text = "&6Error: &cThere must be an unnamed bee within &6" + BeeNameGenerator.getRadius() + " &cblocks of you.";
-                                break;
-                            }
-
-                            // Check if the player has the payment item.
-                            String paymentItem = BeeNameGenerator.getPaymentItem();
-                            boolean hasPaymentItem = player.getInventory().contains(paymentItem);
-                            if (!hasPaymentItem) {
-                                text = "&6Error: &cYou do not have a &6" + paymentItem + " &cin your inventory.";
-                                break;
-                            }
-
-                            // Check if the player has a payment item with a stack size of 1.
-                            for (int i = 0; i < player.getInventory().getSize(); i++) {
-                                AbstractItemStack item = player.getInventory().getItem(i);
-
-                                if (item != null && item.getType().equals("minecraft:name_tag")) {
-                                    // Lower the payment item's stack size by 1.
-                                    item.setCount(item.getCount() - 1);
-                                    player.getInventory().setItem(i, item);
-
-                                    // Get a random bee name.
-                                    name = (String) BeeNameGenerator.getBNGAPIHandler().getBeeName().get("name");
-                                    entity.setCustomName(name);
-                                    text = "&aSuccessfully named a bee &6\"" + name + "\"&a!";
-                                    break;
-                                }
-                            }
+                            text = BNGUtils.autoNameBee(player, entity);
                             break;
 
                         // Gives the player a name tag with a random bee name.
                         case "tag":
-                            // Check if the player has a name tag.
-                            boolean hasNameTag = player.getInventory().contains("minecraft:name_tag");
-                            if (!hasNameTag) {
-                                text = "&6Error: &cYou do not have a &6Name Tag &cin your inventory.";
-                                break;
-                            }
-
-                            // Get a random bee name.
-                            name = (String) BeeNameGenerator.getBNGAPIHandler().getBeeName().get("name");
-
-                            // Give the player a name tag with the random bee name.
-                            for (int i = 0; i < player.getInventory().getSize(); i++) {
-                                AbstractItemStack item = player.getInventory().getItem(i);
-
-                                text = "&6Error: &cYou do not have any blank &6Name Tag&cs in your inventory.";
-
-                                if (item != null && !item.getMeta().hasDisplayName() && item.getType().equals("minecraft:name_tag")) {
-                                    if (item.getCount() == 1) {
-                                        AbstractItemMeta meta = item.getMeta();
-                                        meta.setDisplayName(name);
-                                        item.setMeta(meta);
-                                        player.getInventory().setItem(i, item);
-                                    } else {
-                                        int firstEmptySlot = player.getInventory().firstEmpty();
-                                        if (firstEmptySlot == -1) {
-                                            text = "&6Error: &cYou do not have any empty slots in your inventory.";
-                                            break;
-                                        }
-
-                                        // Lower the name tag's stack size by 1.
-                                        item.setCount(item.getCount() - 1);
-                                        player.getInventory().setItem(i, item);
-
-                                        // Give the player a new name tag with the random bee name.
-                                        AbstractItemStack newItem = item.clone();
-                                        AbstractItemMeta newItemMeta = newItem.getMeta();
-                                        newItemMeta.setDisplayName(name);
-                                        newItem.setMeta(newItemMeta);
-                                        newItem.setCount(1);
-                                        player.getInventory().setItem(firstEmptySlot, newItem);
-                                    }
-                                    text = "&aSuccessfully gave you a name tag with the name &6\"" + name + "\"&a!";
-                                    break;
-                                }
-                            }
+                            text = BNGUtils.giveBeeNameTag(player);
                             break;
                     }
                 }
