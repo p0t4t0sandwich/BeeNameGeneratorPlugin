@@ -37,7 +37,7 @@ public final class BNGUtils {
         for (int i = 0; i < player.getInventory().getSize(); i++) {
             AbstractItemStack item = player.getInventory().getItem(i);
 
-            if (item != null && item.getType().equals("minecraft:name_tag")) {
+            if (item != null && item.getType().equals(paymentItem)) {
                 // Lower the payment item's stack size by 1.
                 item.setCount(item.getCount() - 1);
                 player.getInventory().setItem(i, item);
@@ -71,11 +71,14 @@ public final class BNGUtils {
             AbstractItemStack item = player.getInventory().getItem(i);
 
             if (item != null && !item.getMeta().hasDisplayName() && item.getType().equals("minecraft:name_tag")) {
+                // Check if the name tag has a stack size of 1, and if so, rename it.
                 if (item.getCount() == 1) {
                     AbstractItemMeta meta = item.getMeta();
                     meta.setDisplayName(name);
                     item.setMeta(meta);
                     player.getInventory().setItem(i, item);
+
+                // Otherwise, give the player a new name tag with the random bee name, and lower the name tag's stack size by 1.
                 } else {
                     int firstEmptySlot = player.getInventory().firstEmpty();
                     if (firstEmptySlot == -1) {
