@@ -50,7 +50,6 @@ include(
         'bukkit',
         'common',
         'fabric-1.15',
-        'fabric-1.16',
         'fabric-1.17',
         'fabric-1.20',
         'forge-1.15',

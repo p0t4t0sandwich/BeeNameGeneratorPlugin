@@ -155,29 +155,13 @@ mv ./bukkit/$GROUP_ID/$PROJ_ID/bukkit ./$PROJ_NAME-all/$GROUP_ID/$PROJ_ID
 cp ./bukkit/plugin.yml ./$PROJ_NAME-all
 rm -rf ./bukkit
 
-# Prepare bungee files
-prepareFiles bungee
-
-# Copy bungee files
-mv ./bungee/$GROUP_ID/$PROJ_ID/bungee ./$PROJ_NAME-all/$GROUP_ID/$PROJ_ID
-cp ./bungee/bungee.yml ./$PROJ_NAME-all
-rm -rf ./bungee
-
-# Prepare velocity files
-prepareFiles velocity
-
-# Copy velocity files
-mv ./velocity/$GROUP_ID/$PROJ_ID/velocity ./$PROJ_NAME-all/$GROUP_ID/$PROJ_ID
-cp ./velocity/velocity-plugin.json ./$PROJ_NAME-all
-rm -rf ./velocity
-
 # Prepare common files
 prepareFiles common
 
 # Copy common files
 mv ./common/$GROUP_ID/$PROJ_ID/common ./$PROJ_NAME-all/$GROUP_ID/$PROJ_ID
 mv ./common/$GROUP_ID/$PROJ_ID/lib ./$PROJ_NAME-all/$GROUP_ID/$PROJ_ID
-#cp ./common/config.yml ./$PROJ_NAME-all
+cp ./common/beenamegenerator.config.yml ./$PROJ_NAME-all
 cp ./common/LICENSE ./$PROJ_NAME-all
 cp ../../LICENSE-API ./$PROJ_NAME-all
 cp ../../README.md ./$PROJ_NAME-all
@@ -224,7 +208,7 @@ build $FABRIC_VERSION $FORGE_VERSION $OUT_FILE
 
 # --------------------------- Build 1.16 --------------------------------
 MC_VERSION=1.16
-FABRIC_VERSION=1.16
+FABRIC_VERSION=1.15
 FORGE_VERSION=1.16.1
 SPONGE_VERSION=8
 OUT_FILE=$PROJ_NAME-$VERSION-$MC_VERSION
