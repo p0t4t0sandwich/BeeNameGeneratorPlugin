@@ -6,6 +6,7 @@ import dev.neuralnexus.taterlib.common.Utils;
 import dev.neuralnexus.taterlib.sponge.abstractions.entity.SpongeEntity;
 import dev.neuralnexus.taterlib.sponge.abstractions.player.SpongePlayer;
 import net.kyori.adventure.text.Component;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.Command;
 import org.spongepowered.api.command.CommandExecutor;
 import org.spongepowered.api.command.CommandResult;
@@ -92,7 +93,7 @@ public class SpongeBNGCommand implements CommandExecutor {
             }
 
             SpongeEntity finalBee = bee;
-//            Utils.runTaskAsync(() -> {
+            Utils.runTaskAsync(() -> {
                 try {
                     // Execute command
                     BNGCommand.executeCommand(player, args, finalBee);
@@ -100,7 +101,7 @@ public class SpongeBNGCommand implements CommandExecutor {
                     e.printStackTrace();
                     System.out.println(e);
                 }
-//            });
+            });
         } catch (Exception e) {
             e.printStackTrace();
             return CommandResult.builder()
