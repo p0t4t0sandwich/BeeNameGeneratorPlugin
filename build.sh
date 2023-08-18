@@ -2,7 +2,7 @@
 
 PROJ_ID=beenamegenerator
 PROJ_NAME=BeeNameGenerator
-VERSION=1.0.0
+VERSION=1.0.1-SNAPSHOT
 GROUP_ID=dev/neuralnexus
 
 # --------------------------- Functions --------------------------------

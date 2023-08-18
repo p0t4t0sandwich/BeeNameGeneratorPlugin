@@ -12,7 +12,7 @@ Link to our support: [Discord](https://discord.neuralnexus.dev)
 - [Hangar](https://hangar.papermc.io/p0t4t0sandwich/BeeNameGenerator)
 - [Modrinth](https://modrinth.com/plugin/beenamegenerator)
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/beenamegenerator)
-- Sponge
+- [Sponge](https://ore.spongepowered.org/p0t4t0sandwich/BeeNameGenerator)
 
 ### Compatibility Cheatsheet
 
@@ -29,6 +29,7 @@ BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge (some versions)
 
 ## Dependencies
 
+- [TaterLib](https://github.com/p0t4t0sandwich/TaterLib) - Required on all platforms
 - [FabricAPI](https://modrinth.com/mod/fabric-api) - Required on Fabric
 
 ### Optional Dependencies
@@ -59,7 +60,7 @@ BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge (some versions)
 | `/bng suggest accept <name>`             | `taterlib.command.suggest.accept` | Accept a pending suggestion (Authenticated API Route)     |
 | `/bng suggest reject <name>`             | `taterlib.command.suggest.reject` | Reject a pending suggestion (Authenticated API Route)     |
 
-## Config
+## Configuration
 
 `<plugins/config>/BeeNameGenerator/beenamegenerator.config.yml`
 
@@ -82,3 +83,4 @@ naming:
 ## TODO
 
 ## Release Notes
+- Initial Release
