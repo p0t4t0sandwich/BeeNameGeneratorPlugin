@@ -26,7 +26,7 @@ dependencies {
     }
 
     // TaterLib
-    modImplementation('dev.neuralnexus:TaterLib:1.0.1-1.15')
+    modImplementation("dev.neuralnexus:TaterLib:${minecraft_version}-${taterlib_version}")
 }
 
 processResources {
@@ -49,7 +49,7 @@ shadowJar {
         exclude('/mappings/*')
     }
 
-    archiveFileName = "BeeNameGenerator-${version}-fabric-${minecraft_version}-dev.jar"
+    archiveFileName = "${project_name}-fabric-${minecraft_version}-${version}-dev.jar"
 }
 
 task remappedShadowJar(type: RemapJarTask) {
@@ -58,7 +58,7 @@ task remappedShadowJar(type: RemapJarTask) {
     addNestedDependencies.set(true)
 
     destinationDirectory = file('../target')
-    archiveFileName = "BeeNameGenerator-${version}-fabric-${minecraft_version}.jar"
+    archiveFileName = "${project_name}-fabric-${minecraft_version}-${version}.jar"
 }
 remappedShadowJar.doLast {
     task ->

@@ -4,14 +4,14 @@ plugins {
 
 dependencies {
     // TaterLib
-    compileOnly('dev.neuralnexus:TaterLib:1.0.1-1.20')
+    compileOnly("dev.neuralnexus:TaterLib:1.20-${taterlib_version}")
 }
 
 shadowJar {
     dependencies {}
 
     destinationDirectory = file('../target')
-    archiveFileName = "BeeNameGenerator-${version}-common.jar"
+    archiveFileName = "${project_name}-common-${version}.jar"
 }
 shadowJar.doLast {
     task ->
