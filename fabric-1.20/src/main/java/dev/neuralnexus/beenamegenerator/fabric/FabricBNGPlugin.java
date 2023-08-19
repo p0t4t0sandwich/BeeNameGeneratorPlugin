@@ -19,29 +19,9 @@ public class FabricBNGPlugin extends TemplateFabricPlugin implements BeeNameGene
      * @inheritDoc
      */
     @Override
-    public String pluginConfigPath() {
-        return "config";
-    }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
     public AbstractLogger pluginLogger() {
         return new FabricLogger( "[TaterLib] ", LoggerFactory.getLogger(MOD_ID));
     }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public void registerHooks() {}
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public void registerEventListeners() {}
 
     /**
      * @inheritDoc

@@ -27,24 +27,6 @@ public class ForgeBNGPlugin extends TemplateForgePlugin implements BeeNameGenera
     }
 
     /**
-     * @inheritDoc
-     */
-    @Override
-    public void registerHooks() {}
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public void registerEventListeners() {}
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public void registerCommands() {}
-
-    /**
      * Called when the Forge mod is initializing.
      */
     public ForgeBNGPlugin() {

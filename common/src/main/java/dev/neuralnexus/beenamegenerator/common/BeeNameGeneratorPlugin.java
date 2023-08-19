@@ -7,13 +7,13 @@ import dev.neuralnexus.taterlib.common.TemplatePlugin;
  */
 public interface BeeNameGeneratorPlugin extends TemplatePlugin {
     /**
-     * Starts the BeeNameGenerator plugin.
+     * Starts the plugin.
      */
     default void pluginStart() {
         try {
             useLogger("BeeNameGenerator is running on " + getServerType() + " " + getServerVersion() + "!");
 
-            // Start the TaterAPI
+            // Start
             BeeNameGenerator.start(pluginConfigPath(), pluginLogger());
 
             // Register hooks
@@ -34,7 +34,7 @@ public interface BeeNameGeneratorPlugin extends TemplatePlugin {
     }
 
     /**
-     * Stops the TaterAPI plugin.
+     * Stops the plugin.
      */
     default void pluginStop() {
         try {

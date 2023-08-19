@@ -14,7 +14,7 @@ public class BeeNameGenerator {
     private static final BeeNameGenerator instance = new BeeNameGenerator();
     private static YamlDocument config;
     private static String configPath;
-    private static AbstractLogger logger;
+    public static AbstractLogger logger;
     private static boolean STARTED = false;
     private static final ArrayList<Object> hooks = new ArrayList<>();
     private static BNGAPIHandler bngapiHandler = null;
@@ -41,12 +41,21 @@ public class BeeNameGenerator {
     }
 
     /**
-     * Start BeeNameGenerator
+     * Use the Logger
+     * @param message The message to log
+     */
+    public static void useLogger(String message) {
+        logger.info(message);
+    }
+
+    /**
+     * Start
      * @param configPath The path to the config file
+     * @param logger The logger
      */
     public static void start(String configPath, AbstractLogger logger) {
         BeeNameGenerator.configPath = configPath;
-        TaterLib.logger = logger;
+        BeeNameGenerator.logger = logger;
 
         // Config
         try {
@@ -55,12 +64,12 @@ public class BeeNameGenerator {
             );
             config.reload();
         } catch (IOException | NullPointerException e) {
-            logger.info("Failed to load beenamegenerator.config.yml!\n" + e.getMessage());
+            useLogger("Failed to load beenamegenerator.config.yml!\n" + e.getMessage());
             e.printStackTrace();
         }
 
         if (STARTED) {
-            logger.info("BeeNameGenerator has already started!");
+            useLogger("BeeNameGenerator has already started!");
             return;
         }
         STARTED = true;
@@ -71,55 +80,55 @@ public class BeeNameGenerator {
         if (authToken == null || authToken.equals("") || authToken.equals("YOUR_AUTH_TOKEN")) {
             bngapiHandler = new BNGAPIHandler(baseURL);
         } else {
-            logger.info("Using auth token: " + authToken);
+            useLogger("Using auth token: " + authToken);
             bngapiHandler = new BNGAPIHandler(baseURL, authToken);
         }
 
-        logger.info("BeeNameGenerator has been started!");
+        useLogger("BeeNameGenerator has been started!");
         BeeNameGeneratorAPIProvider.register(instance);
     }
 
     /**
-     * Start TaterAPI
+     * Start
      */
     public static void start() {
         start(configPath, logger);
     }
 
     /**
-     * Stop BeeNameGenerator
+     * Stop
      */
     public static void stop() {
         if (!STARTED) {
-            logger.info("BeeNameGenerator has already stopped!");
+            useLogger("BeeNameGenerator has already stopped!");
             return;
         }
         STARTED = false;
 
-        logger.info("BeeNameGenerator has been stopped!");
+        // Remove references to objects
+        config = null;
+        bngapiHandler = null;
+
+        useLogger("BeeNameGenerator has been stopped!");
         BeeNameGeneratorAPIProvider.unregister();
     }
 
     /**
-     * Reload BeeNameGenerator
+     * Reload
      */
     public static void reload() {
         if (!STARTED) {
-            logger.info("BeeNameGenerator has not been started!");
+            useLogger("BeeNameGenerator has not been started!");
             return;
         }
 
-        // Remove references to config and apiHandler
-        config = null;
-        bngapiHandler = null;
-
-        // Stop BeeNameGenerator
+        // Stop
         stop();
 
-        // Start BeeNameGenerator
+        // Start
         start(configPath, logger);
 
-        logger.info("BeeNameGenerator has been reloaded!");
+        useLogger("BeeNameGenerator has been reloaded!");
     }
 
     /**

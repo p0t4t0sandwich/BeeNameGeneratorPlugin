@@ -13,18 +13,6 @@ public class BukkitBNGPlugin extends TemplateBukkitPlugin implements BeeNameGene
      * @inheritDoc
      */
     @Override
-    public void registerHooks() {}
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public void registerEventListeners() {}
-
-    /**
-     * @inheritDoc
-     */
-    @Override
     public void registerCommands() {
         getCommand(BNGCommand.getCommandName()).setExecutor(new BukkitBNGCommand());
     }
