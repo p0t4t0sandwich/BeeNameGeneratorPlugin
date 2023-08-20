@@ -20,12 +20,6 @@ subprojects {
     repositories {
         mavenCentral()
 
-        // Common
-        maven {
-            name = "jitpack"
-            url = "https://jitpack.io"
-        }
-
         // Bukkit/Bungee
         maven {
             name = "spigotmc-repo"
@@ -34,12 +28,6 @@ subprojects {
         maven {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/groups/public/"
-        }
-
-        // Paper
-        maven {
-            name = "papermc-repo"
-            url = "https://repo.papermc.io/repository/maven-public/"
         }
 
         // NeuralNexus

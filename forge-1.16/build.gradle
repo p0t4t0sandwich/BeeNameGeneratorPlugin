@@ -5,7 +5,7 @@ plugins {
 }
 
 minecraft {
-    mappings(channel: 'snapshot', version: mappings_version)
+    mappings(channel: mappings_channel, version: mappings_version)
 }
 
 dependencies {
