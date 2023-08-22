@@ -34,5 +34,8 @@
     "fabric-command-api-v1": "*",
     "fabric-lifecycle-events-v1": "*",
     "taterlib": "*"
+  },
+  "suggests": {
+    "luckperms": "*"
   }
 }

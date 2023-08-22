@@ -2,7 +2,6 @@ package dev.neuralnexus.beenamegenerator.common;
 
 import dev.neuralnexus.beenamegenerator.common.api.BeeNameGeneratorAPIProvider;
 import dev.neuralnexus.beenamegenerator.common.bngapi.BNGAPIHandler;
-import dev.neuralnexus.taterlib.common.TaterLib;
 import dev.neuralnexus.taterlib.common.abstractions.logger.AbstractLogger;
 import dev.neuralnexus.taterlib.lib.dejvokep.boostedyaml.YamlDocument;
 
@@ -10,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * The BeeNameGenerator class.
+ */
 public class BeeNameGenerator {
     private static final BeeNameGenerator instance = new BeeNameGenerator();
     private static YamlDocument config;

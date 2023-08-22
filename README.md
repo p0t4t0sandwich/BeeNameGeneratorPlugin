@@ -18,14 +18,14 @@ Link to our support: [Discord](https://discord.neuralnexus.dev)
 
 BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge (some versions)
 
-| Server type        | Versions    | Jar Name                      |
-|--------------------|-------------|-------------------------------|
-| All 1.20           | 1.20-1.20.1 | `TaterLib-<version>-1.20.jar` |
-| All 1.19           | 1.19-1.19.4 | `TaterLib-<version>-1.19.jar` |
-| All 1.18           | 1.18-1.18.2 | `TaterLib-<version>-1.18.jar` |
-| All 1.17           | 1.17-1.17.1 | `TaterLib-<version>-1.17.jar` |
-| All 1.16 (Sponge8) | 1.16-1.16.5 | `TaterLib-<version>-1.16.jar` |
-| All 1.15           | 1.15-1.15.2 | `TaterLib-<version>-1.15.jar` |
+| Server type        | Versions    | Jar Name                              |
+|--------------------|-------------|---------------------------------------|
+| All 1.20           | 1.20-1.20.1 | `BeeNameGenerator-<version>-1.20.jar` |
+| All 1.19           | 1.19-1.19.4 | `BeeNameGenerator-<version>-1.19.jar` |
+| All 1.18           | 1.18-1.18.2 | `BeeNameGenerator-<version>-1.18.jar` |
+| All 1.17           | 1.17-1.17.1 | `BeeNameGenerator-<version>-1.17.jar` |
+| All 1.16 (Sponge8) | 1.16-1.16.5 | `BeeNameGenerator-<version>-1.16.jar` |
+| All 1.15           | 1.15-1.15.2 | `BeeNameGenerator-<version>-1.15.jar` |
 
 ## Dependencies
 
@@ -45,20 +45,20 @@ BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge (some versions)
 
 ## Commands and Permissions
 
-| Command                                  | Permission                        | Description                                               |
-|------------------------------------------|-----------------------------------|-----------------------------------------------------------|
-| `/bng help`                              | `taterlib.command.help`           | Show help for commands                                    |
-| `/bng reload`                            | `taterlib.command.reload`         | Reload the plugin                                         |
-| `/bng name <auto/tag>`                   | `taterlib.command.name`           | Name a bee or get a named name tag                        |
-| `/bng name auto`                         | `taterlib.command.name.auto`      | Automatically name a nearby bee                           |
-| `/bng name tag`                          | `taterlib.command.name.tag`       | Get a name tag with a random bee name                     |
-| `/bng get`                               | `taterlib.command.get`            | Gets a random bee name                                    |
-| `/bng add`                               | `taterlib.command.add`            | Adds a bee name to the database (Authenticated API Route) |
-| `/bng suggest <name/list/accept/reject>` | `taterlib.command.suggest`        | Suggest a name to the database                            |
-| `/bng suggest <name>`                    | `taterlib.command.suggest`        | Suggest a name to the database                            |
-| `/bng suggest list`                      | `taterlib.command.suggest.list`   | List all pending suggestions                              |
-| `/bng suggest accept <name>`             | `taterlib.command.suggest.accept` | Accept a pending suggestion (Authenticated API Route)     |
-| `/bng suggest reject <name>`             | `taterlib.command.suggest.reject` | Reject a pending suggestion (Authenticated API Route)     |
+| Command                                  | Permission                   | Description                                               |
+|------------------------------------------|------------------------------|-----------------------------------------------------------|
+| `/bng help`                              | `bng.command.help`           | Show help for commands                                    |
+| `/bng reload`                            | `bng.command.reload`         | Reload the plugin                                         |
+| `/bng name <auto/tag>`                   | `bng.command.name`           | Name a bee or get a named name tag                        |
+| `/bng name auto`                         | `bng.command.name.auto`      | Automatically name a nearby bee                           |
+| `/bng name tag`                          | `bng.command.name.tag`       | Get a name tag with a random bee name                     |
+| `/bng get`                               | `bng.command.get`            | Gets a random bee name                                    |
+| `/bng add`                               | `bng.command.add`            | Adds a bee name to the database (Authenticated API Route) |
+| `/bng suggest <name/list/accept/reject>` | `bng.command.suggest`        | Suggest a name to the database                            |
+| `/bng suggest <name>`                    | `bng.command.suggest`        | Suggest a name to the database                            |
+| `/bng suggest list`                      | `bng.command.suggest.list`   | List all pending suggestions                              |
+| `/bng suggest accept <name>`             | `bng.command.suggest.accept` | Accept a pending suggestion (Authenticated API Route)     |
+| `/bng suggest reject <name>`             | `bng.command.suggest.reject` | Reject a pending suggestion (Authenticated API Route)     |
 
 ## Configuration
 

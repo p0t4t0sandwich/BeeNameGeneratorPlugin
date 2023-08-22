@@ -43,7 +43,7 @@ public class ForgeBNGCommand {
         }
 
         event.getCommandDispatcher().register(literal(BNGCommand.getCommandName())
-            .requires(source -> source.hasPermissionLevel(permissionLevel))
+            .requires(source -> source.hasPermission(permissionLevel))
             .then(argument("command", StringArgumentType.greedyString())
             .executes(context -> {
                 try {
@@ -58,30 +58,26 @@ public class ForgeBNGCommand {
                     int radius = BeeNameGenerator.getRadius();
                     ForgeEntity bee = null;
 
-                    World world = context.getSource().getWorld();
+                    World world = context.getSource().getLevel();
 
-                    List<BeeEntity> bees = world.getEntitiesWithinAABB(
+                    List<BeeEntity> bees = world.getEntities(
                             EntityType.BEE,
-                            serverPlayer.getBoundingBox().expand(radius, radius, radius),
-                            beeEntity -> {
-                                beeEntity.getDisplayName();
-                                return false;
-                            }
+                            serverPlayer.getBoundingBox().inflate(radius, radius, radius),
+                            entity -> entity.getCustomName() == null
                     );
 
                     if (bees.size() > 0) {
-                        EntityPredicate predicate = EntityPredicate.DEFAULT.setDistance(radius);
+                        EntityPredicate predicate = EntityPredicate.DEFAULT.range(radius);
                         bee = new ForgeEntity(
-                                world.getClosestEntityWithinAABB(
-                                        BeeEntity.class, predicate, serverPlayer,
-                                        serverPlayer.getPosX(), serverPlayer.getPosY(), serverPlayer.getPosZ(),
-                                        serverPlayer.getBoundingBox().expand(radius, radius, radius)
-                        ));
+                                world.getNearestEntity(
+                                        bees, predicate, serverPlayer,
+                                        serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ()
+                                ));
                     }
 
                     ForgeEntity finalBee = bee;
                     AtomicInteger success = new AtomicInteger(1);
-                    Util.getServerExecutor().execute(() -> {
+                    Util.backgroundExecutor().execute(() -> {
                         try {
                             // Execute command
                             BNGCommand.executeCommand(player, args, finalBee);
