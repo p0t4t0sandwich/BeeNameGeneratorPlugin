@@ -3,12 +3,10 @@ package dev.neuralnexus.beenamegenerator.common.commands;
 import dev.neuralnexus.beenamegenerator.common.BNGUtils;
 import dev.neuralnexus.beenamegenerator.common.BeeNameGenerator;
 import dev.neuralnexus.taterlib.common.abstractions.entity.AbstractEntity;
-import dev.neuralnexus.taterlib.common.abstractions.item.AbstractItemMeta;
-import dev.neuralnexus.taterlib.common.abstractions.item.AbstractItemStack;
 import dev.neuralnexus.taterlib.common.abstractions.player.AbstractPlayer;
 import dev.neuralnexus.taterlib.common.placeholder.PlaceholderParser;
 
-import java.util.Map;
+import java.util.Arrays;
 
 /**
  * Root command for Bee Name Generator.
@@ -73,8 +71,8 @@ public interface BNGCommand {
 
             // Gets a random bee name.
             case "get":
-                Map<?, ?> res = BeeNameGenerator.getBNGAPIHandler().getBeeName();
-                text = "&6Bee Name: &a" + res.get("name");
+                String name = BeeNameGenerator.getBNGAPIHandler().getBeeName();
+                text = "&6Bee Name: &a" + name;
                 break;
 
             // Adds a bee name to the database.
@@ -96,8 +94,8 @@ public interface BNGCommand {
                         // Gets a list of suggestions.
                         case "list":
                             int amount = args.length == 2 ? 10 : Integer.parseInt(args[2]);
-                            res = BeeNameGenerator.getBNGAPIHandler().getSuggestions(amount);
-                            text = "&a" + res.get("suggestions");
+                            String[] suggestions = BeeNameGenerator.getBNGAPIHandler().getSuggestions(amount);
+                            text = "&a" + Arrays.toString(suggestions);
                             break;
 
                         // Accepts a suggestion.

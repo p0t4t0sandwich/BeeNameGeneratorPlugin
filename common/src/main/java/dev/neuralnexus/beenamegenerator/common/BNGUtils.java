@@ -43,7 +43,7 @@ public final class BNGUtils {
                 player.getInventory().setItem(i, item);
 
                 // Get a random bee name.
-                String name = (String) BeeNameGenerator.getBNGAPIHandler().getBeeName().get("name");
+                String name = BeeNameGenerator.getBNGAPIHandler().getBeeName();
                 entity.setCustomName(name);
                 return "&aSuccessfully named a bee &6\"" + name + "\"&a!";
             }
@@ -64,7 +64,7 @@ public final class BNGUtils {
         }
 
         // Get a random bee name.
-        String name = (String) BeeNameGenerator.getBNGAPIHandler().getBeeName().get("name");
+        String name = BeeNameGenerator.getBNGAPIHandler().getBeeName();
 
         // Give the player a name tag with the random bee name.
         for (int i = 0; i < player.getInventory().getSize(); i++) {

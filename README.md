@@ -82,5 +82,9 @@ naming:
 
 ## TODO
 
+- Add a "check for doubles" radius in the config to prevent naming two bees the same name
+
 ## Release Notes
-- Initial Release
+
+- Built proper classes for GSON to serialize/deserialize to when using the API
+- Capitalize the first letter of the name

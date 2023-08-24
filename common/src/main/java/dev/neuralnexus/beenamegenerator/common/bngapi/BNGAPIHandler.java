@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
 
 public class BNGAPIHandler {
     private final String baseUri;
@@ -81,58 +80,72 @@ public class BNGAPIHandler {
     }
 
     /**
-     * General API call method.
-     * @param endpoint The endpoint to call.
-     * @param requestMethod The request method to use.
+     * Response for the following endpoints:
+     * - GET /name
+     * - POST /name
+     * - POST /suggestion
+     * - PUT /suggestion
+     * - DELETE /suggestion
      */
-    public Map<?,?> APICall(String endpoint, String requestMethod) {
-        return (Map<?, ?>) this.APICall(endpoint, requestMethod, Map.class);
+    public static class NameResponse {
+        public String name;
+    }
+
+    /**
+     * Response for the following endpoints:
+     * - GET /suggestion
+     */
+    public static class GetSuggestionResponse {
+        public String[] suggestions;
     }
 
     /**
      * Get a bee name.
      */
-    public Map<?,?> getBeeName() {
-        return this.APICall("name", "GET");
+    public String getBeeName() {
+        String name = ((NameResponse) this.APICall("name", "GET", NameResponse.class)).name;
+
+        // Capitalize the first letter.
+        return name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 
     /**
      * Upload a bee name (Authentication Required).
      * @param name The name to upload.
      */
-    public Map<?,?> uploadBeeName(String name) {
-        return this.APICall("name/" + name, "POST");
+    public String uploadBeeName(String name) {
+        return ((NameResponse) this.APICall("name/" + name, "POST", NameResponse.class)).name;
     }
 
     /**
      * Submit a bee name.
      * @param name The name to submit.
      */
-    public Map<?,?> submitBeeName(String name) {
-        return this.APICall("suggestion/" + name, "POST");
+    public String submitBeeName(String name) {
+        return ((NameResponse) this.APICall("suggestion/" + name, "POST", NameResponse.class)).name;
     }
 
     /**
      * Get bee name suggestions (Authentication Required).
      * @param amount The amount of suggestions to get.
      */
-    public Map<?,?> getSuggestions(int amount) {
-        return this.APICall("suggestion/" + amount, "GET");
+    public String[] getSuggestions(int amount) {
+        return ((GetSuggestionResponse) this.APICall("suggestion/" + amount, "GET", GetSuggestionResponse.class)).suggestions;
     }
 
     /**
      * Accept a bee name suggestion (Authentication Required).
      * @param name The name to accept.
      */
-    public Map<?,?> acceptSuggestion(String name) {
-        return this.APICall("suggestion/" + name, "PUT");
+    public String acceptSuggestion(String name) {
+        return ((NameResponse) this.APICall("suggestion/" + name, "PUT", NameResponse.class)).name;
     }
 
     /**
      * Reject a bee name suggestion (Authentication Required).
      * @param name The name to reject.
      */
-    public Map<?,?> rejectSuggestion(String name) {
-        return this.APICall("suggestion/" + name, "DELETE");
+    public String rejectSuggestion(String name) {
+        return ((NameResponse) this.APICall("suggestion/" + name, "DELETE", NameResponse.class)).name;
     }
 }
