@@ -51,7 +51,7 @@ public class BNGAPIHandler {
      * @param requestMethod The request method to use.
      * @param returnClass The class to use when serializing the response.
      */
-    public Object APICall(String endpoint, String requestMethod, Class<?> returnClass) {
+    protected <T> T APICall(String endpoint, String requestMethod, Class<T> returnClass) {
         try {
             URL url = new URL(this.dataSource + endpoint);
 
@@ -103,7 +103,7 @@ public class BNGAPIHandler {
      * Get a bee name.
      */
     public String getBeeName() {
-        String name = ((NameResponse) this.APICall("name", "GET", NameResponse.class)).name;
+        String name = this.APICall("name", "GET", NameResponse.class).name;
 
         // Capitalize the first letter.
         return name.substring(0, 1).toUpperCase() + name.substring(1);
@@ -114,7 +114,7 @@ public class BNGAPIHandler {
      * @param name The name to upload.
      */
     public String uploadBeeName(String name) {
-        return ((NameResponse) this.APICall("name/" + name, "POST", NameResponse.class)).name;
+        return this.APICall("name/" + name, "POST", NameResponse.class).name;
     }
 
     /**
@@ -122,7 +122,7 @@ public class BNGAPIHandler {
      * @param name The name to submit.
      */
     public String submitBeeName(String name) {
-        return ((NameResponse) this.APICall("suggestion/" + name, "POST", NameResponse.class)).name;
+        return this.APICall("suggestion/" + name, "POST", NameResponse.class).name;
     }
 
     /**
@@ -130,7 +130,7 @@ public class BNGAPIHandler {
      * @param amount The amount of suggestions to get.
      */
     public String[] getSuggestions(int amount) {
-        return ((GetSuggestionResponse) this.APICall("suggestion/" + amount, "GET", GetSuggestionResponse.class)).suggestions;
+        return this.APICall("suggestion/" + amount, "GET", GetSuggestionResponse.class).suggestions;
     }
 
     /**
@@ -138,7 +138,7 @@ public class BNGAPIHandler {
      * @param name The name to accept.
      */
     public String acceptSuggestion(String name) {
-        return ((NameResponse) this.APICall("suggestion/" + name, "PUT", NameResponse.class)).name;
+        return this.APICall("suggestion/" + name, "PUT", NameResponse.class).name;
     }
 
     /**
@@ -146,6 +146,6 @@ public class BNGAPIHandler {
      * @param name The name to reject.
      */
     public String rejectSuggestion(String name) {
-        return ((NameResponse) this.APICall("suggestion/" + name, "DELETE", NameResponse.class)).name;
+        return this.APICall("suggestion/" + name, "DELETE", NameResponse.class).name;
     }
 }
