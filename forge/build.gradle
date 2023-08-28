@@ -1,0 +1,51 @@
+plugins {
+    id('com.github.johnrengelman.shadow') version('8.1.1')
+    id('net.minecraftforge.gradle') version('[6.0,6.2)')
+    id('org.parchmentmc.librarian.forgegradle') version('1.+')
+}
+
+minecraft {
+    mappings(channel: mappings_channel, version: mappings_version)
+}
+
+dependencies {
+    implementation(project(path: ':forge-1.15', configuration: 'shadow'))
+    implementation(project(path: ':forge-1.16', configuration: 'shadow'))
+    implementation(project(path: ':forge-1.17', configuration: 'shadow'))
+    implementation(project(path: ':forge-1.18', configuration: 'shadow'))
+    implementation(project(path: ':forge-1.19', configuration: 'shadow'))
+    implementation(project(path: ':forge-1.20', configuration: 'shadow'))
+    minecraft("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
+
+    // TaterLib
+    compileOnly("dev.neuralnexus:TaterLib:1.15-${taterlib_version}")
+}
+
+reobf {
+    shadowJar {}
+}
+
+shadowJar {
+    dependencies {
+        include(project(':forge-1.15'))
+        include(project(':forge-1.16'))
+        include(project(':forge-1.17'))
+        include(project(':forge-1.18'))
+        include(project(':forge-1.19'))
+        include(project(':forge-1.20'))
+    }
+
+    destinationDirectory = file('../target')
+    archiveFileName = "${project_name}-forge-${version}.jar"
+}
+shadowJar.doLast {
+    task ->
+        ant.checksum(file: task.archivePath) {
+            hashAlgorithm = 'md5'
+            property = 'md5sum'
+        }
+}
+
+artifacts {
+    archives(shadowJar)
+}
