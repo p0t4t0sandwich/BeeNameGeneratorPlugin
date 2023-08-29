@@ -67,7 +67,7 @@ public class FabricBNGCommand {
                                 entity -> entity.getCustomName() == null
                         );
 
-                        if (bees.size() > 0) {
+                        if (!bees.isEmpty()) {
                             TargetPredicate predicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(radius);
                             bee = new FabricEntity(
                                 world.getClosestEntity(

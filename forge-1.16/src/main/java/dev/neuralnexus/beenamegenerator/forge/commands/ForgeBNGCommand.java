@@ -3,17 +3,17 @@ package dev.neuralnexus.beenamegenerator.forge.commands;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import dev.neuralnexus.beenamegenerator.common.BeeNameGenerator;
 import dev.neuralnexus.beenamegenerator.common.commands.BNGCommand;
-import dev.neuralnexus.beenamegenerator.forge.Forge_1_17_BNGPlugin;
+import dev.neuralnexus.beenamegenerator.forge.ForgeBNGPlugin;
 import dev.neuralnexus.taterlib.common.hooks.LuckPermsHook;
 import dev.neuralnexus.taterlib.forge.abstrations.entity.ForgeEntity;
 import dev.neuralnexus.taterlib.forge.abstrations.player.ForgePlayer;
-import net.minecraft.Util;
-import net.minecraft.commands.Commands;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.animal.Bee;
+import net.minecraft.command.Commands;
+import net.minecraft.entity.EntityPredicate;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.BeeEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Util;
+import net.minecraft.world.World;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,14 +21,13 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static net.minecraft.commands.Commands.argument;
-import static net.minecraft.commands.Commands.literal;
+import static net.minecraft.command.Commands.*;
 
 /**
  * Forge implementation of the BNG command.
  */
-@Mod.EventBusSubscriber(modid = Forge_1_17_BNGPlugin.MOD_ID)
-public class Forge_1_17_BNGCommand {
+@Mod.EventBusSubscriber(modid = ForgeBNGPlugin.MOD_ID)
+public class ForgeBNGCommand {
     /**
      * Registers the command.
      * @param event The command registration event.
@@ -36,7 +35,7 @@ public class Forge_1_17_BNGCommand {
     @SubscribeEvent
     public static void registerCommand(RegisterCommandsEvent event) {
         int permissionLevel;
-        if (event.getEnvironment() == Commands.CommandSelection.DEDICATED) {
+        if (event.getEnvironment() == Commands.EnvironmentType.DEDICATED) {
             // Check if LuckPerms is hooked
             permissionLevel = LuckPermsHook.isHooked() ? 0 : 4;
         } else {
@@ -51,29 +50,29 @@ public class Forge_1_17_BNGCommand {
                     String[] args = context.getArgument("command", String.class).split(" ");
 
                     // Check if sender is a player
-                    if (!(context.getSource().getEntity() instanceof ServerPlayer)) return 1;
-                    ServerPlayer serverPlayer = (ServerPlayer) context.getSource().getEntity();
+                    if (!(context.getSource().getEntity() instanceof PlayerEntity)) return 1;
+                    PlayerEntity serverPlayer = (PlayerEntity) context.getSource().getEntity();
                     ForgePlayer player = new ForgePlayer(serverPlayer);
 
                     // Get the first bee Entity in the given radius
                     int radius = BeeNameGenerator.getRadius();
                     ForgeEntity bee = null;
 
-                    ServerLevel world = context.getSource().getLevel();
+                    World world = context.getSource().getLevel();
 
-                    List<Bee> bees = world.getEntities(
+                    List<BeeEntity> bees = world.getEntities(
                             EntityType.BEE,
                             serverPlayer.getBoundingBox().inflate(radius, radius, radius),
                             entity -> entity.getCustomName() == null
                     );
 
                     if (bees.size() > 0) {
-                        TargetingConditions predicate = TargetingConditions.forNonCombat().range(radius);
+                        EntityPredicate predicate = EntityPredicate.DEFAULT.range(radius);
                         bee = new ForgeEntity(
                                 world.getNearestEntity(
-                                    bees, predicate, serverPlayer,
-                                    serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ()
-                        ));
+                                        bees, predicate, serverPlayer,
+                                        serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ()
+                                ));
                     }
 
                     ForgeEntity finalBee = bee;

@@ -3,7 +3,7 @@ package dev.neuralnexus.beenamegenerator.forge.commands;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import dev.neuralnexus.beenamegenerator.common.BeeNameGenerator;
 import dev.neuralnexus.beenamegenerator.common.commands.BNGCommand;
-import dev.neuralnexus.beenamegenerator.forge.Forge_1_18_BNGPlugin;
+import dev.neuralnexus.beenamegenerator.forge.ForgeBNGPlugin;
 import dev.neuralnexus.taterlib.common.hooks.LuckPermsHook;
 import dev.neuralnexus.taterlib.forge.abstrations.entity.ForgeEntity;
 import dev.neuralnexus.taterlib.forge.abstrations.player.ForgePlayer;
@@ -27,8 +27,8 @@ import static net.minecraft.commands.Commands.literal;
 /**
  * Forge implementation of the BNG command.
  */
-@Mod.EventBusSubscriber(modid = Forge_1_18_BNGPlugin.MOD_ID)
-public class Forge_1_18_BNGCommand {
+@Mod.EventBusSubscriber(modid = ForgeBNGPlugin.MOD_ID)
+public class ForgeBNGCommand {
     /**
      * Registers the command.
      * @param event The command registration event.
@@ -36,7 +36,7 @@ public class Forge_1_18_BNGCommand {
     @SubscribeEvent
     public static void registerCommand(RegisterCommandsEvent event) {
         int permissionLevel;
-        if (event.getEnvironment() == Commands.CommandSelection.DEDICATED) {
+        if (event.getCommandSelection() == Commands.CommandSelection.DEDICATED) {
             // Check if LuckPerms is hooked
             permissionLevel = LuckPermsHook.isHooked() ? 0 : 4;
         } else {

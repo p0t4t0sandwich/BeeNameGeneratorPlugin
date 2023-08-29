@@ -3,20 +3,20 @@ package dev.neuralnexus.beenamegenerator.forge.commands;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import dev.neuralnexus.beenamegenerator.common.BeeNameGenerator;
 import dev.neuralnexus.beenamegenerator.common.commands.BNGCommand;
-import dev.neuralnexus.beenamegenerator.forge.Forge_1_16_BNGPlugin;
+import dev.neuralnexus.beenamegenerator.forge.ForgeBNGPlugin;
 import dev.neuralnexus.taterlib.common.hooks.LuckPermsHook;
 import dev.neuralnexus.taterlib.forge.abstrations.entity.ForgeEntity;
 import dev.neuralnexus.taterlib.forge.abstrations.player.ForgePlayer;
-import net.minecraft.command.Commands;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Util;
 import net.minecraft.world.World;
-import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.loading.FMLLoader;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -26,23 +26,23 @@ import static net.minecraft.command.Commands.*;
 /**
  * Forge implementation of the BNG command.
  */
-@Mod.EventBusSubscriber(modid = Forge_1_16_BNGPlugin.MOD_ID)
-public class Forge_1_16_BNGCommand {
+@Mod.EventBusSubscriber(modid = ForgeBNGPlugin.MOD_ID)
+public class ForgeBNGCommand {
     /**
      * Registers the command.
      * @param event The command registration event.
      */
     @SubscribeEvent
-    public static void registerCommand(RegisterCommandsEvent event) {
+    public static void registerCommand(FMLServerStartingEvent event) {
         int permissionLevel;
-        if (event.getEnvironment() == Commands.EnvironmentType.DEDICATED) {
+        if (FMLLoader.getDist().isDedicatedServer()) {
             // Check if LuckPerms is hooked
             permissionLevel = LuckPermsHook.isHooked() ? 0 : 4;
         } else {
             permissionLevel = 0;
         }
 
-        event.getDispatcher().register(literal(BNGCommand.getCommandName())
+        event.getCommandDispatcher().register(literal(BNGCommand.getCommandName())
             .requires(source -> source.hasPermission(permissionLevel))
             .then(argument("command", StringArgumentType.greedyString())
             .executes(context -> {

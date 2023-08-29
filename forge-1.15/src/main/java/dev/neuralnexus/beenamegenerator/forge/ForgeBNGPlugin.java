@@ -1,21 +1,20 @@
 package dev.neuralnexus.beenamegenerator.forge;
 
 import dev.neuralnexus.beenamegenerator.common.BeeNameGeneratorPlugin;
-import dev.neuralnexus.beenamegenerator.forge.commands.Forge_1_18_BNGCommand;
+import dev.neuralnexus.beenamegenerator.forge.commands.ForgeBNGCommand;
 import dev.neuralnexus.taterlib.common.abstractions.logger.AbstractLogger;
 import dev.neuralnexus.taterlib.forge.TemplateForgePlugin;
 import dev.neuralnexus.taterlib.forge.abstrations.logger.ForgeLogger;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
 import org.apache.logging.log4j.LogManager;
 
 /**
  * The BeeNameGenerator Forge plugin.
  */
-//@Mod(Forge_1_18_BNGPlugin.MOD_ID)
-public class Forge_1_18_BNGPlugin extends TemplateForgePlugin implements BeeNameGeneratorPlugin {
+//@Mod(ForgeBNGPlugin.MOD_ID)
+public class ForgeBNGPlugin extends TemplateForgePlugin implements BeeNameGeneratorPlugin {
     public static final String MOD_ID = "beenamegenerator";
 
     /**
@@ -29,12 +28,12 @@ public class Forge_1_18_BNGPlugin extends TemplateForgePlugin implements BeeName
     /**
      * Called when the Forge mod is initializing.
      */
-    public Forge_1_18_BNGPlugin() {
+    public ForgeBNGPlugin() {
         // Register server starting/stopping events
         MinecraftForge.EVENT_BUS.register(this);
 
         // Register commands
-        MinecraftForge.EVENT_BUS.register(Forge_1_18_BNGCommand.class);
+        MinecraftForge.EVENT_BUS.register(ForgeBNGCommand.class);
         pluginStart();
     }
 
@@ -43,7 +42,7 @@ public class Forge_1_18_BNGPlugin extends TemplateForgePlugin implements BeeName
      * @param event The event.
      */
     @SubscribeEvent
-    public void onServerStopped(ServerStoppedEvent event) {
+    public void onServerStopped(FMLServerStoppedEvent event) {
         pluginStop();
     }
 }
