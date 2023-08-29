@@ -16,16 +16,17 @@ Link to our support: [Discord](https://discord.neuralnexus.dev)
 
 ### Compatibility Cheatsheet
 
-BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge (some versions)
+BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge
 
-| Server type        | Versions    | Jar Name                              |
-|--------------------|-------------|---------------------------------------|
-| All 1.20           | 1.20-1.20.1 | `BeeNameGenerator-<version>-1.20.jar` |
-| All 1.19           | 1.19-1.19.4 | `BeeNameGenerator-<version>-1.19.jar` |
-| All 1.18           | 1.18-1.18.2 | `BeeNameGenerator-<version>-1.18.jar` |
-| All 1.17           | 1.17-1.17.1 | `BeeNameGenerator-<version>-1.17.jar` |
-| All 1.16 (Sponge8) | 1.16-1.16.5 | `BeeNameGenerator-<version>-1.16.jar` |
-| All 1.15           | 1.15-1.15.2 | `BeeNameGenerator-<version>-1.15.jar` |
+| Server type         | Versions    | Jar Name                              |
+|---------------------|-------------|---------------------------------------|
+| All 1.20 (Sponge11) | 1.20-1.20.1 | `BeeNameGenerator-1.20-<version>.jar` |
+| All 1.19 (Sponge10) | 1.19-1.19.4 | `BeeNameGenerator-1.19-<version>.jar` |
+| All 1.18 (Sponge9)  | 1.18-1.18.2 | `BeeNameGenerator-1.18-<version>.jar` |
+| All 1.17 (Sponge9)  | 1.17-1.17.1 | `BeeNameGenerator-1.17-<version>.jar` |
+| All 1.16 (Sponge8)  | 1.16-1.16.5 | `BeeNameGenerator-1.16-<version>.jar` |
+| All 1.15 (Sponge8)  | 1.15-1.15.2 | `BeeNameGenerator-1.15-<version>.jar` |
+| All 1.14            | 1.14-1.14.3 | `BeeNameGenerator-1.14-<version>.jar` |
 
 ## Dependencies
 
@@ -88,3 +89,4 @@ naming:
 
 - Built proper classes for GSON to serialize/deserialize to when using the API
 - Capitalize the first letter of the name
+- Updated Sponge API versions 9, 10, and 11
