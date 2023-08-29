@@ -26,7 +26,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 /**
  * Fabric implementation of the BNG command.
  */
-public class Fabric_1_20_BNGCommand {
+public class FabricBNGCommand {
     /**
      * Registers the command.
      * @param dispatcher The command dispatcher.

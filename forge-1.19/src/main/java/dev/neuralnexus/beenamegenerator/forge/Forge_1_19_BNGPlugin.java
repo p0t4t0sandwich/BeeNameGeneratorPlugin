@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 /**
  * The BeeNameGenerator Forge plugin.
  */
-//@Mod(Forge_1_19_BNGPlugin.MOD_ID)
+@Mod(Forge_1_19_BNGPlugin.MOD_ID)
 public class Forge_1_19_BNGPlugin extends TemplateForgePlugin implements BeeNameGeneratorPlugin {
     public static final String MOD_ID = "beenamegenerator";
 

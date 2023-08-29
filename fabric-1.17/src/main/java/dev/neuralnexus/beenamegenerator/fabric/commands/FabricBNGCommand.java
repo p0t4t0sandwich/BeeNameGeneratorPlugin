@@ -24,7 +24,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 /**
  * Fabric implementation of the BNG command.
  */
-public class Fabric_1_15_BNGCommand {
+public class FabricBNGCommand {
     /**
      * Registers the command.
      * @param dispatcher The command dispatcher.
@@ -58,14 +58,14 @@ public class Fabric_1_15_BNGCommand {
 
                         World world = serverPlayer.getServerWorld();
 
-                        List<BeeEntity> bees = world.getEntities(
+                        List<BeeEntity> bees = world.getEntitiesByType(
                                 EntityType.BEE,
                                 serverPlayer.getBoundingBox().expand(radius, radius, radius),
                                 entity -> entity.getCustomName() == null
                         );
 
                         if (bees.size() > 0) {
-                            TargetPredicate predicate = TargetPredicate.DEFAULT.setBaseMaxDistance(radius);
+                            TargetPredicate predicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(radius);
                             bee = new FabricEntity(
                                 world.getClosestEntity(
                                     bees, predicate, serverPlayer,
