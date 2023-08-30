@@ -26,7 +26,6 @@ BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge
 | All 1.17 (Sponge9)  | 1.17-1.17.1 | `BeeNameGenerator-1.17-<version>.jar` |
 | All 1.16 (Sponge8)  | 1.16-1.16.5 | `BeeNameGenerator-1.16-<version>.jar` |
 | All 1.15 (Sponge8)  | 1.15-1.15.2 | `BeeNameGenerator-1.15-<version>.jar` |
-| All 1.14            | 1.14-1.14.3 | `BeeNameGenerator-1.14-<version>.jar` |
 
 ## Dependencies
 
@@ -43,6 +42,7 @@ BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge
 - You can set the "payment" item in the config, which is the item that is consumed when using the `/bng name auto` command (defaults to a name tag).
 - The naming radius can be set in the config, which is the radius around the player that the plugin will look for bees to name (defaults to 10 blocks).
 - Some commands require an authenticated API key to use them, which is set in the config (you'd need to host your own [API endpoint](https://github.com/p0t4t0sandwich/bee-name-generator)).
+- If you know of any nice bee-entity mods, let me know and I'll add support for them!
 
 ## Commands and Permissions
 
