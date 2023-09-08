@@ -1,18 +1,26 @@
 # BeeNameGenerator
 
+[![License](https://img.shields.io/github/license/p0t4t0sandwich/BeeNameGeneratorPlugin?color=blue)](https://img.shields.io/github/downloads/p0t4t0sandwich/BeeNameGeneratorPlugin/LICENSE)
+[![Github](https://img.shields.io/github/stars/p0t4t0sandwich/BeeNameGeneratorPlugin)](https://github.com/p0t4t0sandwich/BeeNameGeneratorPlugin)
+[![Github Issues](https://img.shields.io/github/issues/p0t4t0sandwich/BeeNameGeneratorPlugin?label=Issues)](https://github.com/p0t4t0sandwich/BeeNameGeneratorPlugin/issues)
+[![Discord](https://img.shields.io/discord/1067482396246683708?color=7289da&logo=discord&logoColor=white)](https://discord.neuralnexus.dev)
+[![wakatime](https://wakatime.com/badge/user/fc67ce74-ca69-40a4-912f-61b26dbe3068/project/0f240003-7202-4e04-810e-e83bb007db81.svg)](https://wakatime.com/badge/user/fc67ce74-ca69-40a4-912f-61b26dbe3068/project/0f240003-7202-4e04-810e-e83bb007db81)
+
 A Minecraft plugin that implements the [bee-name-generator](https://github.com/p0t4t0sandwich/bee-name-generator) API to generate bee names automagically
 
 Link to our support: [Discord](https://discord.neuralnexus.dev)
 
 ## Download
 
-- [GitHub](https://github.com/p0t4t0sandwich/BeeNameGeneratorPlugin/releases)
-- [Maven Repo](https://maven.neuralnexus.dev/#/releases/dev/neuralnexus/BeeNameGenerator)
-- [Spigot](https://www.spigotmc.org/resources/beenamegenerator.112100/)
-- [Hangar](https://hangar.papermc.io/p0t4t0sandwich/BeeNameGenerator)
-- [Modrinth](https://modrinth.com/plugin/beenamegenerator)
-- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/beenamegenerator)
-- [Sponge](https://ore.spongepowered.org/p0t4t0sandwich/BeeNameGenerator)
+[![Github Releases](https://img.shields.io/github/downloads/p0t4t0sandwich/BeeNameGeneratorPlugin/total?label=Github&logo=github&color=181717)](https://github.com/p0t4t0sandwich/BeeNameGeneratorPlugin/releases)
+[![Maven Repo](https://img.shields.io/maven-metadata/v?label=Release&metadataUrl=https%3A%2F%2Fmaven.neuralnexus.dev%2Freleases%2Fdev%2Fneuralnexus%2FBeeNameGenerator%2Fmaven-metadata.xml)](https://maven.neuralnexus.dev/#/releases/dev/neuralnexus/BeeNameGenerator)
+[![Maven Repo](https://img.shields.io/maven-metadata/v?label=Snapshot&metadataUrl=https%3A%2F%2Fmaven.neuralnexus.dev%2Fsnapshots%2Fdev%2Fneuralnexus%2FBeeNameGenerator%2Fmaven-metadata.xml)](https://maven.neuralnexus.dev/#/snapshots/dev/neuralnexus/BeeNameGenerator)
+
+[![Spigot](https://img.shields.io/spiget/downloads/112100?label=Spigot&logo=spigotmc&color=ED8106)](https://www.spigotmc.org/resources/beenamegenerator.112100/)
+[![Hangar](https://img.shields.io/badge/Hangar-download-blue)](https://hangar.papermc.io/p0t4t0sandwich/BeeNameGenerator)
+[![Modrinth](https://img.shields.io/modrinth/dt/beenamegenerator?label=Modrinth&logo=modrinth&color=00AF5C)](https://modrinth.com/mod/beenamegenerator)
+[![CurseForge](https://img.shields.io/curseforge/dt/903965?label=CurseForge&logo=curseforge&color=F16436)](https://www.curseforge.com/minecraft/mc-mods/beenamegenerator)
+[![Sponge](https://img.shields.io/ore/dt/beenamegenerator?label=Sponge&logo=https%3A%2F%2Fspongepowered.org%2Ffavicon.ico&color=F7CF0D)](https://ore.spongepowered.org/p0t4t0sandwich/BeeNameGenerator)
 
 ### Compatibility Cheatsheet
 
