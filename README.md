@@ -24,7 +24,7 @@ Link to our support: [Discord](https://discord.neuralnexus.dev)
 
 ### Compatibility Cheatsheet
 
-BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge
+BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge (8-11 works with the same jar)
 
 | Server type         | Versions    | Jar Name                              |
 |---------------------|-------------|---------------------------------------|
@@ -93,8 +93,9 @@ naming:
 
 - Add a "check for doubles" radius in the config to prevent naming two bees the same name
 
-## Release Notes
+## Release Notes v1.0.1
 
 - Built proper classes for GSON to serialize/deserialize to when using the API
 - Capitalize the first letter of the name
-- Updated Sponge API versions 9, 10, and 11
+- Fixed Sponge radius checking
+- Tested on Sponge versions 9, 10, and 11

@@ -85,7 +85,7 @@ public class SpongeBNGCommand implements CommandExecutor {
                 double bz = b.location().z();
 
                 double distance = Math.sqrt(Math.pow(px - bx, 2) + Math.pow(py - by, 2) + Math.pow(pz - bz, 2));
-                if (bee == null || distance < closestDistance) {
+                if ((bee == null || distance < closestDistance) && distance <= radius) {
                     bee = new SpongeEntity(b);
                     closestDistance = distance;
                 }
