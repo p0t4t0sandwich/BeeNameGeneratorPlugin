@@ -93,7 +93,9 @@ naming:
 
 - Add a "check for doubles" radius in the config to prevent naming two bees the same name
 
-## Release Notes v1.0.1
+## Release Notes
+
+### v1.0.1
 
 - Built proper classes for GSON to serialize/deserialize to when using the API
 - Capitalize the first letter of the name
