@@ -28,7 +28,7 @@ BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge (8-11 works with th
 
 | Server type         | Versions    | Jar Name                              |
 |---------------------|-------------|---------------------------------------|
-| All 1.20 (Sponge11) | 1.20-1.20.1 | `BeeNameGenerator-1.20-<version>.jar` |
+| All 1.20 (Sponge11) | 1.20-1.20.2 | `BeeNameGenerator-1.20-<version>.jar` |
 | All 1.19 (Sponge10) | 1.19-1.19.4 | `BeeNameGenerator-1.19-<version>.jar` |
 | All 1.18 (Sponge9)  | 1.18-1.18.2 | `BeeNameGenerator-1.18-<version>.jar` |
 | All 1.17 (Sponge9)  | 1.17-1.17.1 | `BeeNameGenerator-1.17-<version>.jar` |
