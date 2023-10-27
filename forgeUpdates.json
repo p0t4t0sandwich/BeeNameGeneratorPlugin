@@ -1,50 +1,41 @@
 {
-    "homepage": "https://github.com/p0t4t0sandwich/ServerPanelManager/releases",
-    "1.12": {
-      "1.0.0": "Initial Release"
-    },
-    "1.13": {
-      "1.0.0": "Initial Release"
-    },
-    "1.14": {
-      "1.0.0": "Initial Release"
-    },
+    "homepage": "https://github.com/p0t4t0sandwich/BeeNameGeneratorPlugin/releases",
     "1.15": {
-      "1.0.0": "Initial Release"
+      "1.0.0": "Initial Release",
+      "1.0.1": "- Built proper classes for GSON to serialize/deserialize to when using the API\n- Capitalize the first letter of the name\n- Fixed Sponge radius checking\n- Tested on Sponge versions 9, 10, and 11"
     },
     "1.16": {
-      "1.0.0": "Initial Release"
+      "1.0.0": "Initial Release",
+      "1.0.1": "- Built proper classes for GSON to serialize/deserialize to when using the API\n- Capitalize the first letter of the name\n- Fixed Sponge radius checking\n- Tested on Sponge versions 9, 10, and 11"
     },
     "1.17": {
-      "1.0.0": "Initial Release"
+      "1.0.0": "Initial Release",
+      "1.0.1": "- Built proper classes for GSON to serialize/deserialize to when using the API\n- Capitalize the first letter of the name\n- Fixed Sponge radius checking\n- Tested on Sponge versions 9, 10, and 11"
     },
     "1.18": {
-      "1.0.0": "Initial Release"
+      "1.0.0": "Initial Release",
+      "1.0.1": "- Built proper classes for GSON to serialize/deserialize to when using the API\n- Capitalize the first letter of the name\n- Fixed Sponge radius checking\n- Tested on Sponge versions 9, 10, and 11"
     },
     "1.19": {
-      "1.0.0": "Initial Release"
+      "1.0.0": "Initial Release",
+      "1.0.1": "- Built proper classes for GSON to serialize/deserialize to when using the API\n- Capitalize the first letter of the name\n- Fixed Sponge radius checking\n- Tested on Sponge versions 9, 10, and 11"
     },
     "1.20": {
-      "1.0.0": "Initial Release"
+      "1.0.0": "Initial Release",
+      "1.0.1": "- Built proper classes for GSON to serialize/deserialize to when using the API\n- Capitalize the first letter of the name\n- Fixed Sponge radius checking\n- Tested on Sponge versions 9, 10, and 11"
     },
     "promos": {
-      "1.12-latest": "1.0.0",
-      "1.12-recommended": "1.0.0",
-      "1.13-latest": "1.0.0",
-      "1.13-recommended": "1.0.0",
-      "1.14-latest": "1.0.0",
-      "1.14-recommended": "1.0.0",
-      "1.15-latest": "1.0.0",
-      "1.15-recommended": "1.0.0",
-      "1.16-latest": "1.0.0",
-      "1.16-recommended": "1.0.0",
-      "1.17-latest": "1.0.0",
-      "1.17-recommended": "1.0.0",
-      "1.18-latest": "1.0.0",
-      "1.18-recommended": "1.0.0",
-      "1.19-latest": "1.0.0",
-      "1.19-recommended": "1.0.0" ,
-      "1.20-latest": "1.0.0",
-      "1.20-recommended": "1.0.0"
+      "1.15-latest": "1.0.1",
+      "1.15-recommended": "1.0.1",
+      "1.16-latest": "1.0.1",
+      "1.16-recommended": "1.0.1",
+      "1.17-latest": "1.0.1",
+      "1.17-recommended": "1.0.1",
+      "1.18-latest": "1.0.01",
+      "1.18-recommended": "1.0.1",
+      "1.19-latest": "1.0.1",
+      "1.19-recommended": "1.0.1" ,
+      "1.20-latest": "1.0.1",
+      "1.20-recommended": "1.0.1"
     }
 }
