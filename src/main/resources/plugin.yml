@@ -9,12 +9,7 @@ depends: [ TaterLib ]
 softdepends: [ ]
 folia-supported: true
 commands:
-  tatercomms:
-    description: TaterComms command
-    aliases: [ tc ]
-    usage: /tatercomms
-    permission: tatercomms.admin
-  discord:
-    description: Get the discord invite link
-    usage: /discord
-    permission: tatercomms.command.discord
+  bng:
+    description: "A command that generates a name for a bee."
+    usage: /bng <command> [args]
+    permission: bng.command
