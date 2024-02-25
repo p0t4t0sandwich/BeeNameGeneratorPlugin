@@ -1,6 +1,8 @@
 package dev.neuralnexus.beenamegenerator;
 
 import dev.neuralnexus.taterlib.api.TaterAPIProvider;
+import dev.neuralnexus.taterlib.api.info.MinecraftVersion;
+import dev.neuralnexus.taterlib.api.info.ServerType;
 import dev.neuralnexus.taterlib.event.api.PluginEvents;
 import dev.neuralnexus.taterlib.logger.AbstractLogger;
 import dev.neuralnexus.taterlib.plugin.Plugin;
@@ -20,21 +22,26 @@ public interface BeeNameGeneratorPlugin extends Plugin {
     @Override
     default void pluginStart(
             Object plugin, Object pluginServer, Object pluginLogger, AbstractLogger logger) {
-        if (TaterAPIProvider.serverType().isBungeeCordBased()
-                || TaterAPIProvider.serverType().isVelocityBased()) {
+        ServerType serverType = TaterAPIProvider.serverType();
+        MinecraftVersion minecraftVersion = TaterAPIProvider.minecraftVersion();
+        if (serverType.isBungeeCordBased()
+                || serverType.isVelocityBased()
+                || minecraftVersion.isOlderThan(MinecraftVersion.V1_15)) {
             logger.error(
                     BeeNameGenerator.Constants.PROJECT_NAME
                             + " is not supported on "
-                            + TaterAPIProvider.serverType()
+                            + serverType
+                            + " "
+                            + minecraftVersion
                             + "!");
             return;
         }
         logger.info(
                 BeeNameGenerator.Constants.PROJECT_NAME
                         + " is running on "
-                        + TaterAPIProvider.serverType()
+                        + serverType
                         + " "
-                        + TaterAPIProvider.minecraftVersion()
+                        + minecraftVersion
                         + "!");
 
         PluginEvents.DISABLED.register(event -> pluginStop());
