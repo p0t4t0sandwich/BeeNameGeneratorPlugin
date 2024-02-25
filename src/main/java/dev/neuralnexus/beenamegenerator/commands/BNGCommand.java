@@ -200,10 +200,9 @@ public class BNGCommand implements Command {
                                         "&6Error: &cYou do not have any empty slots in your inventory.";
                                 break;
                             }
-
                             nameTag.get().setCount(nameTag.get().count() - 1);
                             ItemStack newItem = nameTag.get().clone();
-                            newItem.setDisplayName(name);
+                            newItem.setDisplayName(beeName);
                             newItem.setCount(1);
                             player.inventory().set(firstEmptySlot, newItem);
                             break;
