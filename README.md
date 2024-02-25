@@ -14,27 +14,23 @@ Link to our support: [Discord](https://discord.neuralnexus.dev)
 ## Download
 
 [![Github Releases](https://img.shields.io/github/downloads/p0t4t0sandwich/BeeNameGeneratorPlugin/total?label=Github&logo=github&color=181717)](https://github.com/p0t4t0sandwich/BeeNameGeneratorPlugin/releases)
-[![Maven Repo](https://img.shields.io/maven-metadata/v?label=Release&metadataUrl=https%3A%2F%2Fmaven.neuralnexus.dev%2Freleases%2Fdev%2Fneuralnexus%2FBeeNameGenerator%2Fmaven-metadata.xml)](https://maven.neuralnexus.dev/#/releases/dev/neuralnexus/BeeNameGenerator)
-[![Maven Repo](https://img.shields.io/maven-metadata/v?label=Snapshot&metadataUrl=https%3A%2F%2Fmaven.neuralnexus.dev%2Fsnapshots%2Fdev%2Fneuralnexus%2FBeeNameGenerator%2Fmaven-metadata.xml)](https://maven.neuralnexus.dev/#/snapshots/dev/neuralnexus/BeeNameGenerator)
-
 [![Spigot](https://img.shields.io/spiget/downloads/112100?label=Spigot&logo=spigotmc&color=ED8106)](https://www.spigotmc.org/resources/beenamegenerator.112100/)
 [![Hangar](https://img.shields.io/badge/Hangar-download-blue)](https://hangar.papermc.io/p0t4t0sandwich/BeeNameGenerator)
 [![Modrinth](https://img.shields.io/modrinth/dt/beenamegenerator?label=Modrinth&logo=modrinth&color=00AF5C)](https://modrinth.com/mod/beenamegenerator)
 [![CurseForge](https://img.shields.io/curseforge/dt/903965?label=CurseForge&logo=curseforge&color=F16436)](https://www.curseforge.com/minecraft/mc-mods/beenamegenerator)
 [![Sponge](https://img.shields.io/ore/dt/beenamegenerator?label=Sponge&logo=https%3A%2F%2Fspongepowered.org%2Ffavicon.ico&color=F7CF0D)](https://ore.spongepowered.org/p0t4t0sandwich/BeeNameGenerator)
 
+Jenkins: [![Jenkins Build](https://img.shields.io/jenkins/build?jobUrl=https%3A%2F%2Fjenkins.neuralnexus.dev%2Fjob%2FBeeNameGenerator%2F)](https://jenkins.neuralnexus.dev/job/BeeNameGenerator/)
+
+Maven: [![Maven Repo](https://img.shields.io/maven-metadata/v?label=Release&metadataUrl=https%3A%2F%2Fmaven.neuralnexus.dev%2Freleases%2Fdev%2Fneuralnexus%2FBeeNameGenerator%2Fmaven-metadata.xml)](https://maven.neuralnexus.dev/#/releases/dev/neuralnexus/BeeNameGenerator)
+
 ### Compatibility Cheatsheet
 
-BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge from version 1.15 to 1.20.4, all in the same Jar.
+BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge on versions 1.15 and up, all in one Jar.
 
 ## Dependencies
 
 - [TaterLib](https://github.com/p0t4t0sandwich/TaterLib) - Required on all platforms
-- [FabricAPI](https://modrinth.com/mod/fabric-api) - Required on Fabric
-
-### Optional Dependencies
-
-- [LuckPerms](https://luckperms.net/) - For permissions/prefix/suffix support
 
 ## Usage
 
@@ -90,6 +86,21 @@ naming = {
     requirePayment: true,
     // The item to use as payment for naming bees
     paymentItem: "minecraft:name_tag",
+}
+```
+
+## Developer API
+
+```gradle
+repositories {
+    maven {
+        name = 'NeuralNexus'
+        url = 'https://maven.neuralnexus.dev/releases' // or snapshots
+    }
+}
+
+dependencies {
+    compileOnly('dev.neuralnexus:beenamegenerator:<version>')
 }
 ```
 
