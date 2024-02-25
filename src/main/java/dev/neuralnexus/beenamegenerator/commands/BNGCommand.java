@@ -81,6 +81,7 @@ public class BNGCommand implements Command {
                     text = "&cUsage: /bng name <auto|tag>";
                 } else {
                     Player player = sender.asPlayer();
+                    String beeName;
                     switch (args[1].toLowerCase()) {
                         case "auto": // Automatically names a bee.
                             NamingConfig naming = BNGConfigLoader.config().naming();
@@ -97,7 +98,7 @@ public class BNGCommand implements Command {
                                 break;
                             }
 
-                            String beeName = BNGAPIProvider.get().getBeeName();
+                            beeName = BNGAPIProvider.get().getBeeName();
                             if (!naming.allowDuplicates()) {
                                 List<String> nearbyBeeNames =
                                         entities.stream()
@@ -161,8 +162,8 @@ public class BNGCommand implements Command {
                                     }
                                 }
                             }
-                            closestNameableBee.get().setCustomName(name);
-                            text = "&aSuccessfully named a bee &6\"" + name + "\"&a!";
+                            closestNameableBee.get().setCustomName(beeName);
+                            text = "&aSuccessfully named a bee &6\"" + beeName + "\"&a!";
                             break;
                         case "tag": // Gives the player a name tag with a random bee name.
                             // Get a name tag from the player's inventory.
@@ -180,15 +181,15 @@ public class BNGCommand implements Command {
                                 break;
                             }
 
-                            String name = BNGAPIProvider.get().getBeeName();
+                            beeName = BNGAPIProvider.get().getBeeName();
                             text =
                                     "&aSuccessfully gave you a name tag with the name &6\""
-                                            + name
+                                            + beeName
                                             + "\"&a!";
 
                             // Give the player a name tag with the random bee name.
                             if (nameTag.get().count() == 1) {
-                                nameTag.get().setDisplayName(name);
+                                nameTag.get().setDisplayName(beeName);
 
                                 break;
                             }
