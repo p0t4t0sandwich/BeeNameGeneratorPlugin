@@ -6,7 +6,8 @@
 [![Discord](https://img.shields.io/discord/1067482396246683708?color=7289da&logo=discord&logoColor=white)](https://discord.neuralnexus.dev)
 [![wakatime](https://wakatime.com/badge/user/fc67ce74-ca69-40a4-912f-61b26dbe3068/project/0f240003-7202-4e04-810e-e83bb007db81.svg)](https://wakatime.com/badge/user/fc67ce74-ca69-40a4-912f-61b26dbe3068/project/0f240003-7202-4e04-810e-e83bb007db81)
 
-A Minecraft plugin that implements the [bee-name-generator](https://github.com/p0t4t0sandwich/bee-name-generator) API to generate bee names automagically
+A Minecraft plugin that implements the [bee-name-generator](https://github.com/p0t4t0sandwich/bee-name-generator) API to
+generate bee names automagically
 
 Link to our support: [Discord](https://discord.neuralnexus.dev)
 
@@ -24,16 +25,7 @@ Link to our support: [Discord](https://discord.neuralnexus.dev)
 
 ### Compatibility Cheatsheet
 
-BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge (8-11 works with the same jar)
-
-| Server type         | Versions    | Jar Name                              |
-|---------------------|-------------|---------------------------------------|
-| All 1.20 (Sponge11) | 1.20-1.20.2 | `BeeNameGenerator-1.20-<version>.jar` |
-| All 1.19 (Sponge10) | 1.19-1.19.4 | `BeeNameGenerator-1.19-<version>.jar` |
-| All 1.18 (Sponge9)  | 1.18-1.18.2 | `BeeNameGenerator-1.18-<version>.jar` |
-| All 1.17 (Sponge9)  | 1.17-1.17.1 | `BeeNameGenerator-1.17-<version>.jar` |
-| All 1.16 (Sponge8)  | 1.16-1.16.5 | `BeeNameGenerator-1.16-<version>.jar` |
-| All 1.15 (Sponge8)  | 1.15-1.15.2 | `BeeNameGenerator-1.15-<version>.jar` |
+BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge from version 1.15 to 1.20.4, all in the same Jar.
 
 ## Dependencies
 
@@ -47,9 +39,12 @@ BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge (8-11 works with th
 ## Usage
 
 - Commands either require a permissions manager or OP level 4 in order to use them.
-- You can set the "payment" item in the config, which is the item that is consumed when using the `/bng name auto` command (defaults to a name tag).
-- The naming radius can be set in the config, which is the radius around the player that the plugin will look for bees to name (defaults to 10 blocks).
-- Some commands require an authenticated API key to use them, which is set in the config (you'd need to host your own [API endpoint](https://github.com/p0t4t0sandwich/bee-name-generator)).
+- You can set the "payment" item in the config, which is the item that is consumed when using the `/bng name auto`
+  command (defaults to a name tag).
+- The naming radius can be set in the config, which is the radius around the player that the plugin will look for bees
+  to name (defaults to 10 blocks).
+- Some commands require an authenticated API key to use them, which is set in the config (you'd need to host your
+  own [API endpoint](https://github.com/p0t4t0sandwich/bee-name-generator)).
 - If you know of any nice bee-entity mods, let me know and I'll add support for them!
 
 ## Commands and Permissions
@@ -71,33 +66,39 @@ BeeNameGenerator supports: Bukkit, Fabric, Forge, and Sponge (8-11 works with th
 
 ## Configuration
 
-`<plugins/config>/BeeNameGenerator/beenamegenerator.config.yml`
+`<plugins/config>/BeeNameGenerator/beenamegenerator.conf`
 
-```yaml
----
-version: 1
+```hocon
+// Config version, DO NOT CHANGE THIS
+version = 1
 
-api:
-  # URL for the Bee Name Generator API
-  base_url: "https://api.sperrer.ca/api/v1/bee-name-generator"
+api = {
+    // URL for the Bee Name Generator API
+    baseUrl: "https://api.sperrer.ca/api/v1/bee-name-generator"
+    // Auth Token for the Bee Name Generator API
+    authToken: "YOUR_AUTH_TOKEN"
+}
 
-  # Auth Token for the Bee Name Generator API
-  auth_token: "YOUR_AUTH_TOKEN"
-
-naming:
-  radius: 10
-  payment_item: "minecraft:name_tag"
+naming = {
+    // Radius to search for bees in
+    radius: 10,
+    // Whether to allow duplicate names in the same area
+    allowDuplicates: false
+    // Radius to search for bees in if allow_duplicates is false
+    duplicateRadius: 30,
+    // Whether to require payment when naming bees
+    requirePayment: true,
+    // The item to use as payment for naming bees
+    paymentItem: "minecraft:name_tag",
+}
 ```
 
-## TODO
+## Metrics
 
-- Add a "check for doubles" radius in the config to prevent naming two bees the same name
+### Bukkit
 
-## Release Notes
+![image](https://bstats.org/signatures/bukkit/BeeNameGenerator.svg)
 
-### v1.0.1
+### Sponge
 
-- Built proper classes for GSON to serialize/deserialize to when using the API
-- Capitalize the first letter of the name
-- Fixed Sponge radius checking
-- Tested on Sponge versions 9, 10, and 11
+![image](https://bstats.org/signatures/sponge/BeeNameGenerator.svg)
