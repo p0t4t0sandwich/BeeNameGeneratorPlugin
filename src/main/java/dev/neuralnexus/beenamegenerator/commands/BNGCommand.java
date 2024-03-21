@@ -88,7 +88,13 @@ public class BNGCommand implements Command {
                             List<Entity> entities =
                                     player.nearbyEntities(
                                             naming.duplicateRadius(),
-                                            entity -> entity.type().equals("minecraft:bee"));
+                                            entity -> {
+                                                // TODO: Fix this upstream in TaterLib #69
+                                                // entity.type().equals("minecraft:bee");
+                                                String type = entity.type();
+                                                return type.equals("BEE")
+                                                        || type.equals("minecraft:bee");
+                                            });
 
                             if (entities.isEmpty()) {
                                 text =
@@ -143,7 +149,18 @@ public class BNGCommand implements Command {
                             boolean hasPaymentItem;
                             String paymentItem = BNGConfigLoader.config().naming().paymentItem();
                             if (BNGConfigLoader.config().naming().requirePayment()) {
-                                hasPaymentItem = player.inventory().contains(paymentItem);
+                                // hasPaymentItem =
+                                // player.inventory().contains(paymentItem);
+                                hasPaymentItem = false;
+                                for (ItemStack item : player.inventory().contents()) {
+                                    try {
+                                        if (item.type().equals(paymentItem)) {
+                                            hasPaymentItem = true;
+                                            break;
+                                        }
+                                    } catch (Exception ignore) {
+                                    }
+                                }
                                 if (!hasPaymentItem) {
                                     text =
                                             "&6Error: &cYou do not have a &6"
@@ -152,13 +169,21 @@ public class BNGCommand implements Command {
                                     break;
                                 }
 
-                                // Check if the player has a payment item with a stack size of 1.
                                 for (int i = 0; i < player.inventory().size(); i++) {
                                     ItemStack item = player.inventory().get(i);
-                                    if (item != null && item.type().equals(paymentItem)) {
-                                        item.setCount(item.count() - 1);
-                                        player.inventory().set(i, item);
-                                        break;
+                                    // if (item != null && item.type().equals(paymentItem)) {
+                                    // item.setCount(item.count() - 1);
+                                    // player.inventory().set(i, item);
+                                    // break;
+                                    // }
+                                    // TODO: Fix this upstream in TaterLib #68
+                                    try {
+                                        if (item.type().equals(paymentItem)) {
+                                            item.setCount(item.count() - 1);
+                                            player.inventory().set(i, item);
+                                            break;
+                                        }
+                                    } catch (Exception ignore) {
                                     }
                                 }
                             }
@@ -169,11 +194,19 @@ public class BNGCommand implements Command {
                             // Get a name tag from the player's inventory.
                             Optional<ItemStack> nameTag =
                                     player.inventory().contents().stream()
+                                            // TODO: Fix this upstream in TaterLib #68
                                             .filter(
-                                                    itemStack ->
-                                                            itemStack
+                                                    (itemStack) -> {
+                                                        try {
+                                                            return itemStack
                                                                     .type()
-                                                                    .equals("minecraft:name_tag"))
+                                                                    .equals("minecraft:name_tag");
+                                                        } catch (Exception e) {
+                                                            return false;
+                                                        }
+                                                    })
+                                            // .filter(itemStack ->
+                                            // itemStack.type().equals("minecraft:name_tag"))
                                             .findFirst();
                             if (!nameTag.isPresent()) {
                                 text =
@@ -188,9 +221,8 @@ public class BNGCommand implements Command {
                                             + "\"&a!";
 
                             // Give the player a name tag with the random bee name.
-                            if (nameTag.get().count() == 1) {
+                            if (nameTag.get().count() == 1 && nameTag.get().displayName() == null) {
                                 nameTag.get().setDisplayName(beeName);
-
                                 break;
                             }
 
@@ -200,6 +232,12 @@ public class BNGCommand implements Command {
                                         "&6Error: &cYou do not have any empty slots in your inventory.";
                                 break;
                             }
+
+                            if (nameTag.get().count() == 1) {
+                                nameTag.get().setDisplayName(beeName);
+                                break;
+                            }
+
                             nameTag.get().setCount(nameTag.get().count() - 1);
                             ItemStack newItem = nameTag.get().clone();
                             newItem.setDisplayName(beeName);
